@@ -4,34 +4,44 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { CarService } from './shared/car/car.service';
+import { BoatService } from './shared/boat/boat.service';
 import { HttpClientModule } from '@angular/common/http';
-import { CarListComponent } from './car-list/car-list.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';  // bylo /shared/car/car-list/car-list.component
+import { BoatListComponent } from './boat-list/boat-list.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { CarEditComponent } from './car-edit/car-edit.component';
+import { BoatEditComponent } from './boat-edit/boat-edit.component';
 
 
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import {UserListComponent} from "./user-list/user-list.component";
+import {LoginListComponent} from "./login-list/login-list.component";
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/car-list', pathMatch: 'full' },
+  { path: '', redirectTo: '/boat-list', pathMatch: 'full' },
   {
-    path: 'car-list',
-    component: CarListComponent
+    path: 'boat-list',
+    component: BoatListComponent
   },
   {
-    path: 'car-add',
-    component: CarEditComponent
+    path: 'boat-add',
+    component: BoatEditComponent
   },
   {
-    path: 'car-edit/:id',
-    component: CarEditComponent
+    path: 'boat-edit/:id',
+    component: BoatEditComponent
+  },
+  {
+    path: 'registration',
+    component: UserListComponent
+  },
+  {
+    path: 'login',
+    component: LoginListComponent
   }
 ];
 
@@ -39,8 +49,10 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    CarListComponent,
-    CarEditComponent //  bylo
+    BoatListComponent,
+    BoatEditComponent,
+    UserListComponent,
+    LoginListComponent
   ],
   imports: [
     BrowserModule,
@@ -54,19 +66,8 @@ const appRoutes: Routes = [
         FormsModule,
             RouterModule.forRoot(appRoutes)
   ],
-  providers: [CarService],
+  providers: [BoatService],
   bootstrap: [AppComponent]
 })
 
-// @NgModule({
-//   declarations: [
-//     AppComponent
-//   ],
-//   imports: [
-//     BrowserModule,
-//     AppRoutingModule
-//   ],
-//   providers: [],
-//   bootstrap: [AppComponent]
-// })
 export class AppModule { }
