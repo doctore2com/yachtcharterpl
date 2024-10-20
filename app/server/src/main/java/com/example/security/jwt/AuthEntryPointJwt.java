@@ -12,6 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+// Replace javax.servlet imports with these:
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+
+
 @Component
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {
 
