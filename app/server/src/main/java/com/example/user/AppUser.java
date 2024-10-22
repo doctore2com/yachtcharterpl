@@ -1,6 +1,5 @@
 package com.example.user;
 
-
 import com.example.charter.Charter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +14,8 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+@Table(name = "app_users") // Consider changing the table name to avoid conflicts
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,6 @@ public class User {
     private String username;
     private String email;
     private String password;
-
 
     @OneToMany
     private Set<Charter> charter;
