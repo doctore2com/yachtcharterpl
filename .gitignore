@@ -16,6 +16,7 @@ Thumbs.db
 /app/client/dist-electron/
 /app/client/dist-packages/
 /app/client/electron.main.js
+/app/client/.angular/cache/
 
 # IDEs and editors
 .idea/
