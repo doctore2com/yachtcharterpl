@@ -1,0 +1,65 @@
+# Common
+.DS_Store
+Thumbs.db
+*.log
+.env*
+
+# Client (Angular)
+/app/client/dist/
+/app/client/tmp/
+/app/client/out-tsc/
+/app/client/bazel-out/
+/app/client/node_modules/
+/app/client/www/
+/app/client/plugins/
+/app/client/platforms/
+/app/client/dist-electron/
+/app/client/dist-packages/
+/app/client/electron.main.js
+
+# IDEs and editors
+.idea/
+!.idea/runConfigurations/
+!.idea/codeStyleSettings.xml
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+xcuserdata/
+*.sublime-workspace
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Server (Java/Maven)
+/app/server/target/
+/app/server/log/
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Maven
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Testing
+/app/client/coverage/
+/app/client/reports/
+/app/client/src/translations/template.*
+**/test-results/
+**/coverage/
+
+# Misc
+**/connect.lock
+**/libpeerconnection.log
+**/npm-debug.log
+**/yarn-error.log
+**/testem.log
+**/typings/
