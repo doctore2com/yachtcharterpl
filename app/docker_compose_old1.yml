@@ -1,6 +1,20 @@
 services:
-  app:
-    build: .
+  
+  client:
+    build: 
+        context:./client
+        dockerfile:Dockerfile
+    ports:
+      - "4200:80"
+    depends_on:
+      - server
+    networks:
+      - yacht-charter-network
+              
+  server:
+    build: 
+        context:./server
+        dockerfile:Dockerfile
     ports:
       - "8080:8080"
     depends_on:
@@ -31,5 +45,6 @@ volumes:
   mysql-data:
 
 networks:
-  default:
+  yacht-charter-network:
+    driver: bridge
     name: yacht-charter-network
