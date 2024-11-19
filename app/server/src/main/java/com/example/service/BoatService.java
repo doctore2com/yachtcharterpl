@@ -26,7 +26,11 @@ public class  BoatService {
         boatRepository.save(boat);
     }
 
-    public void updateBoat(Boat boat) {
+    public void updateBoat(Long id, Boat boatDetails) {
+        Boat boat = boatRepository.findById(id).orElseThrow(()->new RuntimeException("Boat not found"));
+        boat.setName(boatDetails.getName());
+        boat.setDescription(boatDetails.getDescription());
+        // #1 uzupelnic pozostale pola
         boatRepository.save(boat);
     }
 

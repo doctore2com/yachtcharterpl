@@ -29,9 +29,10 @@ public class BoatController {
         boatService.addBoat(boat);
     }   
 
+    @PutMapping("/updateBoat")
     @PostMapping("/updateBoat")
-    public void updateBoat(@RequestBody Boat boat) {
-        boatService.updateBoat(boat);
+    public void updateBoat(@PathVariable Long boatId, @RequestBody Boat boat) {
+        boatService.updateBoat(boatId, boat);
     }
 
     @DeleteMapping("/deleteBoat/{boatId}")
