@@ -13,24 +13,17 @@ docker volume ls
 docker volume rm yacht-charter-mysql-data
 
 
-
-DOCKER:
- 
+docker-compose down --volumes --remove-orphans
 docker-compose down
 docker-compose up --build
 docker-compose up db
 
-
-BASH:
-
 net start mysql80
 net stop mysql80
 
-MYSQL:
 
 mysql -u root -p
 
-GIT:
 
 git add client
 git status
@@ -44,21 +37,11 @@ git fetch origin
 git branch
 git rebase -i HEAD~5
 git push --force-with-lease
-git remote -v
 del .git /F /Q
 
 
-VIM:
 
-\q  wyjscie 
+README
 
-
-
-07.11.2024
 1. Zatrzymanie mysql
 2. Uruchomienie DockerDesktop 
-
-16.11..2024
-1. Skonfigurować po SSH  VVVVV
-2. Sklonować repo 
-3. Uporządkować notatnik - README i puschować na repo VVVVV
