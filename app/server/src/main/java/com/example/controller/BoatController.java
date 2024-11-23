@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/boats")
-@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*", allowCredentials = "true")
 public class BoatController {
 
     @Autowired
