@@ -30,6 +30,20 @@ public class  BoatService {
         Boat boat = boatRepository.findById(id).orElseThrow(()->new RuntimeException("Boat not found"));
         boat.setName(boatDetails.getName());
         boat.setDescription(boatDetails.getDescription());
+        boat.setBunk(boatDetails.getBunk());
+        boat.setCharter(boatDetails.getCharter());
+        boat.setCabins(boatDetails.getCabins());
+        boat.setDistance(boatDetails.getDistance());
+        boat.setImageSource(boatDetails.getImageSource());
+        boat.setLandlord(boatDetails.getLandlord());
+        boat.setManufacturer(boatDetails.getManufacturer());
+        boat.setOpinions(boatDetails.getOpinions());
+        boat.setPlacesInside(boatDetails.getPlacesInside());
+        boat.setPower(boatDetails.getPower());
+        boat.setPriceInTheSeason(boatDetails.getPriceInTheSeason());
+        boat.setPriceOutOfSeason(boatDetails.getPriceOutOfSeason());
+        boat.setYear(boatDetails.getYear());
+        boat.setCharter(boatDetails.getCharter());
         // #1 uzupelnic pozostale pola
         boatRepository.save(boat);
     }

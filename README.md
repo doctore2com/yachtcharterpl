@@ -4,6 +4,8 @@ MVN:
 mvn dependency:purge-local-repository
 mvn dependency:resolve
 mvn clean package -Dmaven.test.skip=true
+mvn clean install -U  (w app/server)
+mvn spring-boot:run (w master/yachtcharterpl)
 mvn clean install-DskipTests
 mvn -version
 
@@ -51,6 +53,7 @@ VIM:
 
 \q  wyjscie 
 
+ssh-keygen -t ed25519 -C "milanoitaliana@gmail.com"
 
 
 07.11.2024
