@@ -24,10 +24,6 @@ JWT_EXPIRATION=86400000
 example.app.jwtSecret=your_very_secret_key_here
 example.app.jwtExpirationMs=86400000
 
-# Other Configuration 
+# Other Configuration
 spring.main.banner-mode=off
 spring.jackson.serialization.FAIL_ON_EMPTY_BEANS=false
-
-# CORS
-spring.mvc.cors.allowed-origins=http://localhost:3000
-spring.mvc.cors.allowed-methods=GET,POST,PUT,DELETE,OPTIONS

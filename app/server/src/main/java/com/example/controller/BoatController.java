@@ -9,33 +9,35 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/boats")
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class BoatController {
 
     @Autowired
     private BoatService boatService;
+    //kom
 
-    @GetMapping("/allBoat")
+    @GetMapping("/")
     public List<Boat> getAllBoats() {
         return boatService.getAllBoats();
     }
 
-    @GetMapping("/oneBoat/{boatId}")
+    @GetMapping("/{boatId}")
     public Boat getBoat(@PathVariable Long boatId) {
         return boatService.getBoat(boatId);
     }
 
-    @PostMapping("/addBoat")
+    @PostMapping("/")
     public void addBoat(@RequestBody Boat boat) {
         boatService.addBoat(boat);
     }   
 
-    @PutMapping("/updateBoat/{boatId}")
+    @PutMapping("/{boatId}")
     //@PostMapping("/updateBoat")
     public void updateBoat(@PathVariable Long boatId, @RequestBody Boat boat) {
         boatService.updateBoat(boatId, boat);
     }
 
-    @DeleteMapping("/deleteBoat/{boatId}")
+    @DeleteMapping("/{boatId}")
     public void deleteBoat(@PathVariable Long boatId) {
         boatService.deleteBoat(boatId);
     }
