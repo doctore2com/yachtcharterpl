@@ -75,7 +75,7 @@ ssh-keygen -t ed25519 -C "milanoitaliana@gmail.com"
 3. Uzupełnić zapytania do charters w odniesieniu do boats
 4. Poprawić endpointy wg nomenklatury poniżej dla charters i innych
 5. Sprawdzić pozostałe zapytania postman, tak aby zwracały status 200 (m.in. dodać crossorigin tak jak w boatcontroller.
-
+6. 
 
 GET /boats         - pobierz wszystkie łódki
 GET /boats/{id}    - pobierz konkretną łódkę
