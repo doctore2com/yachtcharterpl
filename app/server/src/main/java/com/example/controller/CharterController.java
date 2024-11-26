@@ -10,34 +10,35 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/charters")
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*", allowCredentials = "true")
 public class CharterController {
 
     @Autowired
     private CharterService charterService;
 
-    @GetMapping("/charters")
+    @GetMapping("/")
     public List<Charter> getAllCharters() {
         return charterService.getAllCharters();
     }
 
-    @GetMapping("/{boatId}/charters/{id}")
-    public Charter getCharter(@PathVariable Long id) {
-        return charterService.getCharter(id);
+    @GetMapping("/{charterId}")
+    public Charter getCharter(@PathVariable Long charterId) {
+        return charterService.getCharter(charterId);
     }
 
-    @PostMapping("/{boatId}/charters")
-    public void addCharter(@RequestBody Charter charter, @PathVariable Long boatId){
-        charterService.addCharter(charter, boatId);
+    @PostMapping("/")
+    public void addCharter(@RequestBody Charter charter){
+        charterService.addCharter(charter);
     }
 
-    @PostMapping("/charters")
-    public void updateCharter(@RequestBody Charter charter){
-         charterService.updateCharter(charter);
+    @PutMapping("/{charterId}")
+    public void updateCharter(@PathVariable Long charterId,  @RequestBody Charter charter){
+         charterService.updateCharter(charterId, charter);
     }
 
-    @DeleteMapping("/{boatId}")
-    public void deleteCharter(@PathVariable Long id) {
-        charterService.deleteCharter(id);
+    @DeleteMapping("/{charterId}")
+    public void deleteCharter(@PathVariable Long charterId) {
+        charterService.deleteCharter(charterId);
     }
     }
 

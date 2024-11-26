@@ -28,12 +28,19 @@ public class CharterService {
         return charterRepository.findById(id).get();
     }
 
-    public void addCharter(Charter charter, Long boatId) {
+    public void addCharter(Charter charter) {
 //        Boat boat = boatRepository.getById(boatId);
         charterRepository.save(charter);
     }
 
-    public void updateCharter(Charter charter) {
+    public void updateCharter(Long id, Charter charterDetails) {
+
+        Charter charter = charterRepository.findById(id).orElseThrow(()->new RuntimeException("Charter not found"));
+        charter.setName(charterDetails.getName());
+        charter.setDescription(charterDetails.getDescription());
+        charter.setPort(charterDetails.getPort());
+        charter.setStartCharter(charterDetails.getStartCharter());
+        charter.setEndCharter(charterDetails.getEndCharter());
         charterRepository.save(charter);
     }
 

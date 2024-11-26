@@ -3,7 +3,6 @@
 Thumbs.db
 *.log
 .env*
-/.ssh/
 
 # Client (Angular)
 /app/client/dist/

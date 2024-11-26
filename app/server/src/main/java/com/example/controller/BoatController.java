@@ -14,8 +14,6 @@ public class BoatController {
 
     @Autowired
     private BoatService boatService;
-    //kom
-
     @GetMapping("/")
     public List<Boat> getAllBoats() {
         return boatService.getAllBoats();
