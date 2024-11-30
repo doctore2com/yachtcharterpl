@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,6 +25,13 @@ public class CharterService {
 //                .forEach(charters::add);
 //        return charters;
 //    }
+
+    public boolean isBoatAvailable (Long boatId, Date startDate, Date endDate){
+        List<Charter> overlappingCharters= charterRepository.findOverlappingCharters(boatId, startDate, endDate;
+        return overlappingCharters.isEmpty();
+    }
+
+    
     public List<Charter> getAllCharters(){
         return charterRepository.findAll();
     }

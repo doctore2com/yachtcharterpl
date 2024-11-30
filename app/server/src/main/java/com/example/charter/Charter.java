@@ -2,7 +2,9 @@ package com.example.charter;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
+import com.example.boat.Boat;
 import com.example.model.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -23,6 +25,18 @@ public class Charter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne(fetch =FetchType.LAZY)
+    @JoinColumn(name="user_id", nullable = false)
+    @NotNull(message = "User is required")
+    private User user;
+
+    @ManyToOne(fetch =FetchType.LAZY)
+    @JoinColumn(name="boat_id", nullable = false)
+    @NotNull(message = "Boat is required")
+    private Boat boat;
+
+
     @Column(name="charter_name")
     private String name;
     private String description;
@@ -33,9 +47,8 @@ public class Charter {
     @Column(name="end_charter")
     private Date endCharter;
     private String port;
-    @ManyToOne(fetch =FetchType.LAZY)
-    @JoinColumn(name="user_id")
-    private User user;
+
+
 
 
 }

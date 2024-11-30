@@ -87,7 +87,7 @@ DELETE /boats/{id} - usuń łódkę
 
 1. Live Coding na Visual Studio Code (ext. live share)
 2. Pozmieniać zapytania na Postman w odniesieniu do AddCharter
-3. Dodać do klasy User relacje ManyToOne do charteru
+3. Dodać do klasy User relacje ManyToOne do charteru VVVVV
 4. Rozpisać relacje między klasami (entities) -> wtyczka, która generuje wizualnie zależności (boats, charters, users)
 
 CRUD dla charteru (dodawanie rezerwacji
@@ -97,3 +97,9 @@ CRUD dla łodzi (dodawanie, wyświetlanie, edycja, usuwanie).
 
 @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "Europe/Warsaw")
     @Column(name="start_charter")
+	
+30.11.2024
+
+1. Live Coding na Visual Studio Code (ext. live share)
+2. Pozmieniać zapytania na Postman w odniesieniu do AddCharter
+3. Rozpisać relacje między klasami (entities) -> wtyczka, która generuje wizualnie zależności (boats, charters, users)
