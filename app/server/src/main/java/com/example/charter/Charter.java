@@ -33,8 +33,8 @@ public class Charter {
     @Column(name="end_charter")
     private Date endCharter;
     private String port;
-    @ManyToOne
-    @JoinColumn(name="id")
+    @ManyToOne(fetch =FetchType.LAZY)
+    @JoinColumn(name="user_id")
     private User user;
 
 
