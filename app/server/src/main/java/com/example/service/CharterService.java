@@ -3,12 +3,16 @@ package com.example.service;
 import com.example.charter.Charter;
 import com.example.repository.CharterRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CharterService {
 
     private final CharterRepository charterRepository;
@@ -29,8 +33,20 @@ public class CharterService {
     }
 
     public void addCharter(Charter charter) {
-//        Boat boat = boatRepository.getById(boatId);
-        charterRepository.save(charter);
+
+        try {
+            log.info("Attempting to save charter: {}", charter);
+            if (charter.getStartCharter() != null &&
+                    charter.getEndCharter() != null &&
+                    charter.getStartCharter().compareTo(charter.getEndCharter())>0) {
+                throw new IllegalArgumentException("Start date must be before end date");
+            }
+            charterRepository.save(charter);
+            log.info("Charter saved successfully with id: {}", charter.getId());
+        } catch (Exception e) {
+            log.error("Error saving charter: ", e);
+            throw e;
+        }
     }
 
     public void updateCharter(Long id, Charter charterDetails) {
