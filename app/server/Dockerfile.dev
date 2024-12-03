@@ -1,0 +1,15 @@
+FROM maven:3.8.4-openjdk-17
+
+WORKDIR /app
+
+# Kopiuj tylko pom.xml najpierw
+COPY pom.xml .
+
+# Pobierz zależności
+RUN mvn dependency:go-offline
+
+# Kopiuj kod źródłowy
+COPY src ./src
+
+# Uruchom z spring-boot-devtools
+CMD ["mvn", "spring-boot:run", "-Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005'"]

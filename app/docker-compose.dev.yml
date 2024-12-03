@@ -1,0 +1,46 @@
+services:
+  client:
+      build:
+        context: ./client
+        dockerfile: Dockerfile.dev
+      working_dir: /app
+      ports:
+        - "4200:4200"
+      volumes:
+        - ./client:/app
+        - /app/node_modules
+      command: bash -c "npm install && npm start -- --poll=2000 --host 0.0.0.0"
+      environment:
+        - WATCHPACK_POLLING=true
+        - CHOKIDAR_USEPOLLING=true
+      depends_on:
+        - server
+      networks:
+        - yacht-net
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    container_name: yacht-charter-server-dev
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./server:/app
+      - ~/.m2:/root/.m2
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/yacht_charter?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_SHOW_SQL=true
+      - SPRING_DEVTOOLS_RESTART_ENABLED=true
+      - SPRING_DEVTOOLS_LIVERELOAD_ENABLED=true
+    networks:
+      - yacht-net
+    restart: unless-stopped
+
+networks:
+  yacht-net:
+    driver: bridge

@@ -20,6 +20,7 @@ docker stop $(docker ps -a -q)
 docker-compose
 docker volume ls
 docker volume rm yacht-charter-mysql-data
+docker-compose -f docker-compose.dev.yml build
 
 
 BASH:

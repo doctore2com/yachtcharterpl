@@ -27,11 +27,10 @@ public class CharterService {
 //    }
 
     public boolean isBoatAvailable (Long boatId, Date startDate, Date endDate){
-        List<Charter> overlappingCharters= charterRepository.findOverlappingCharters(boatId, startDate, endDate;
+        List<Charter> overlappingCharters= charterRepository.findOverlappingCharters(boatId, startDate, endDate);
         return overlappingCharters.isEmpty();
     }
 
-    
     public List<Charter> getAllCharters(){
         return charterRepository.findAll();
     }
