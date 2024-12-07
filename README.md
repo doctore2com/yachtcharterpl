@@ -107,5 +107,9 @@ CRUD dla łodzi (dodawanie, wyświetlanie, edycja, usuwanie).
 
 03.12.2024
 
-1. Visual Studio Code działające
-2. Entities między klasami rospiane  
+1. Visual Studio Code działające  VVVVV
+
+7.12.2024
+
+1. Zdefiniować model w .ts dla każdego obiektu z backendu
+2. boat.service.ts - sprawdzić ściezki do backendu czy się zgadzają w odniesieniu do |Postmana ( z jakiegoś powodu TS nie pobiera danych z 8080)
