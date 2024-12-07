@@ -21,7 +21,7 @@ docker-compose
 docker volume ls
 docker volume rm yacht-charter-mysql-data
 docker-compose -f docker-compose.dev.yml build
-
+docker-compose -f docker-compose.dev.yml up
 
 BASH:
 
@@ -101,6 +101,11 @@ CRUD dla łodzi (dodawanie, wyświetlanie, edycja, usuwanie).
 	
 30.11.2024
 
-1. Live Coding na Visual Studio Code (ext. live share)
-2. Pozmieniać zapytania na Postman w odniesieniu do AddCharter
+1. Live Coding na Visual Studio Code (ext. live share)  VVVVV
+2. Pozmieniać zapytania na Postman w odniesieniu do AddCharter VVVVVV
 3. Rozpisać relacje między klasami (entities) -> wtyczka, która generuje wizualnie zależności (boats, charters, users)
+
+03.12.2024
+
+1. Visual Studio Code działające
+2. Entities między klasami rospiane  
