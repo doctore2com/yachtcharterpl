@@ -20,6 +20,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import {UserListComponent} from "./user-list/user-list.component";
 import {LoginListComponent} from "./login-list/login-list.component";
+import { BoatDetailsComponent } from './boat-details/boat-details.component';
+import { CharterFormComponent } from './charter-form/charter-form.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/boat-list', pathMatch: 'full' },
@@ -52,7 +54,9 @@ const appRoutes: Routes = [
     BoatListComponent,
     BoatEditComponent,
     UserListComponent,
-    LoginListComponent
+    LoginListComponent,
+    BoatDetailsComponent,
+    CharterFormComponent
   ],
   imports: [
     BrowserModule,
