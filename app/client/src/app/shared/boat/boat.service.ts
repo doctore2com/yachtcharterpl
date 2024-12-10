@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -14,7 +14,7 @@ public BOAT_API = this.API + '/boats';
 
 getAll(): Observable<any> {
     console.log('getall');
-    return this.http.get(this.BOAT_API + '/allBoat');
+    return this.http.get(this.BOAT_API + '/');
   }
   get(id: string) {
       return this.http.get(this.BOAT_API + '/' + id);
