@@ -112,8 +112,14 @@ CRUD dla łodzi (dodawanie, wyświetlanie, edycja, usuwanie).
 7.12.2024
 
 1. Zdefiniować model w .ts dla każdego obiektu z backendu  VVVVV
-2. boat.service.ts - sprawdzić ściezki do backendu czy się zgadzają w odniesieniu do |Postmana ( z jakiegoś powodu TS nie pobiera danych z 8080)
+2. boat.service.ts - sprawdzić ściezki do backendu czy się zgadzają w odniesieniu do |Postmana ( z jakiegoś powodu TS nie pobiera danych z 8080) VVVVV
 
 chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security 
 
 ng g c charter-form
+
+10.12.2024
+
+1. Przygotować listę łódek (boat-list), aby się poprawnie wyświetlały z potrzebnymi minimalnymi danymi (w postaci tabeli, jakieś krawędzie, z przyciskiem WYBIERZ)
+2. Wyświetlić daną łódkę (boat-details), aby wyświetlało tylko jeden obiekt z danymi szczegółowymi i przyciskiem zarezerwuj.
+3. Spróbować dokończyć charter-form, aby pobrał po boat.id dane łódki z przyciskiem WYCZARTERUJ.

@@ -14,5 +14,4 @@ export interface Boat{
   year:number;
   power:number;
   distance:number;
-  //#1 dokonczyć typy i pola z backendu
 }
