@@ -18,16 +18,16 @@
         </div>
         </div>
     </div>
-    <div *ngFor="let boat of boat" style="margin-top: 1em;, margin-left: 1em, margin-right: 1em, margin-bottom: 1em">
+    <div *ngFor="let boat of boat" style="margin-top: 1em, margin-left 1em, margin-right 1em, margin-bottom 1em">
       <div class="card" style="width: 18rem;">
-        <img class="card-img-top" style="max-height: 200px" src="{{boat.imageSource}}}" alt="Card image cap">
+        <img class="card-img-top" style="max-height: 200px" src="{{boat.imageSource}}" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">{{boat.name}}</h5>
           <p class="card-text">{{boat.description}}</p>
           <p class="card-text">{{boat.placesInside}} osób</p>
           <p class="card-text">{{boat.priceInTheSeason}} zł</p>
-          <!--    {{charter.startCharter}}-->
-          <!--    {{charter.endCharter}}-->
+             <!-- {{charter.startCharter}}-->
+          <!--    {{charter.endCharter}} -->
           <button color="primary"
                   [routerLink]="['/charter-form',boat.id]"></button>
           <a href="/charter-form" class="btn btn-primary">Zarezerwuj</a>
@@ -49,4 +49,3 @@
 <!--    [routerLink]="['/charter-form',boat.id]"></button>-->
 <!--  </div>-->
 
-</div>

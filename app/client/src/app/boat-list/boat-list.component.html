@@ -12,36 +12,34 @@
 </div>
 <div class="container">
   <div class="row">
-    <div class="col-sm">col-sm</div>
-    <div class="col-sm">col-sm</div>
-    <div class="col-sm">col-sm</div>
-
-
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          Column
-        </div>
-        <div class="col">
-          Column
-        </div>
-        <div class="col">
-          Column
-        </div>
+  <div class="container">
+      <div *ngIf="error" class="error-message">
+        {{error}}
       </div>
     </div>
-    <div *ngFor="let boat of boats" style="margin-top: 1em;, margin-left: 1em, margin-right: 1em, margin-bottom: 1em">
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" style="max-height: 200px" src="{{boat.imageSource}}}" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">{{boat.name}}</h5>
-          <p class="card-text">{{boat.description}}</p>
-          <p class="card-text">{{boat.placesInside}} osób</p>
-          <p class="card-text">{{boat.priceInTheSeason}} zł</p>
-          <a href="/boat-details/" class="btn btn-primary">Sprawdź szczegóły</a>
-        </div>
+    <div *ngIf="!loading && !error" class="row">
+      <div *ngFor="let boat of boats" class="col-md-4 mb-4">
+        <mat-card class="boat-card">
+          <img mat-card-image [src]="boat.imageSource" [alt]="boat.name">
+          <mat-card-header>
+            <mat-card-title>{{boat.name}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{boat.description}}</p>
+            <p><strong>Miejsca:</strong> {{boat.placesInside}}</p>
+            <p><strong>Cena:</strong> {{boat.priceInTheSeason}} zł</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button [routerLink]="['/boat-details', boat.id]">
+              Szczegóły
+            </button>
+          </mat-card-actions>
+        </mat-card>
       </div>
     </div>
+    </div>
+  </div>
+  </div>
   </div>
 </div>
 

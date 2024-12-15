@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/charters")
-@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*", allowCredentials = "true")
 public class CharterController {
 
     @Autowired

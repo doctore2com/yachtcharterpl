@@ -3,20 +3,31 @@ package com.example.controller;
 import com.example.boat.Boat;
 import com.example.service.BoatService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/boats")
-@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*", allowCredentials = "true")
 public class BoatController {
 
     @Autowired
     private BoatService boatService;
     @GetMapping("/")
     public List<Boat> getAllBoats() {
-        return boatService.getAllBoats();
+        // try {
+        //     List<Boat> boats = boatService.getAllBoats();
+        //     if (boats.isEmpty()) {
+        //         return ResponseEntity.noContent().build();
+        //     }
+        //     return ResponseEntity.ok(boats);
+        // } catch (Exception e) {
+        //     return ResponseEntity.internalServerError().build();
+        // }
     }
 
     @GetMapping("/{boatId}")

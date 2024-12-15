@@ -5,7 +5,7 @@ mvn dependency:purge-local-repository
 mvn dependency:resolve
 mvn clean package -Dmaven.test.skip=true
 mvn clean install -U  (w app/server)
-mvn spring-boot:run (w master/yachtcharterpl)
+mvn spring-boot:run (w master/yachtcharterpl/app/server)
 mvn clean install-DskipTests
 mvn -version
 
@@ -121,5 +121,5 @@ ng g c charter-form
 10.12.2024
 
 1. Przygotować listę łódek (boat-list), aby się poprawnie wyświetlały z potrzebnymi minimalnymi danymi (w postaci tabeli, jakieś krawędzie, z przyciskiem WYBIERZ)  VVVVV
-2. Wyświetlić daną łódkę (boat-details), aby wyświetlało tylko jeden obiekt z danymi szczegółowymi i przyciskiem zarezerwuj.
+2. Wyświetlić daną łódkę (boat-details), aby wyświetlało tylko jeden obiekt z danymi szczegółowymi i przyciskiem zarezerwuj. VVVVV
 3. Spróbować dokończyć charter-form, aby pobrał po boat.id dane łódki z przyciskiem WYCZARTERUJ.

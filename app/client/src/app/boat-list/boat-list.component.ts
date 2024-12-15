@@ -17,12 +17,14 @@ export class BoatListComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('Inicjalizacja BoatListComponent');
     this.loadBoats();
   }
 
     loadBoats(){
       this.boatService.getAll().subscribe({
         next:(data)=>{
+          console.log('Otrzymane dane:', data);
           this.boats = data;
         },
         error:(err)=>{
