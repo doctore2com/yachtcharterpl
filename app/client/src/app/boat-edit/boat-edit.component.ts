@@ -21,6 +21,7 @@ boat: any = {};
                                            {
   }
 
+
   ngOnInit() {
                 this.sub = this.route.params.subscribe(params => {
                   const id = params['id'];

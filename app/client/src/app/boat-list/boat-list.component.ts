@@ -26,10 +26,11 @@ export class BoatListComponent implements OnInit {
         next:(data)=>{
           console.log('Otrzymane dane:', data);
           this.boats = data;
-        },
-        error:(err)=>{
-          this.error = 'Błąd ładowania';
-        }
+          }
+        //   ,
+        // error:(err)=>{
+        //   this.error = 'Błąd ładowania';
+        // }
       })
     }
       //   this.boatService.getAll().subscribe(data => {

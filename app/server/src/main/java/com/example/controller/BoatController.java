@@ -19,35 +19,29 @@ public class BoatController {
     private BoatService boatService;
     @GetMapping("/")
     public List<Boat> getAllBoats() {
-        // try {
-        //     List<Boat> boats = boatService.getAllBoats();
-        //     if (boats.isEmpty()) {
-        //         return ResponseEntity.noContent().build();
-        //     }
-        //     return ResponseEntity.ok(boats);
-        // } catch (Exception e) {
-        //     return ResponseEntity.internalServerError().build();
-        // }
-    }
+        List<Boat> boats = boatService.getAllBoats();
+        System.out.println("Controller returned boats: " + boats.size()); // debugging
+        return boats;
+        }
 
-    @GetMapping("/{boatId}")
-    public Boat getBoat(@PathVariable Long boatId) {
-        return boatService.getBoat(boatId);
-    }
+        @GetMapping("/{boatId}")
+        public Boat getBoat (@PathVariable Long boatId){
+            return boatService.getBoat(boatId);
+        }
 
-    @PostMapping("/")
-    public void addBoat(@RequestBody Boat boat) {
-        boatService.addBoat(boat);
-    }   
+        @PostMapping("/")
+        public void addBoat (@RequestBody Boat boat){
+            boatService.addBoat(boat);
+        }
 
-    @PutMapping("/{boatId}")
-    //@PostMapping("/updateBoat")
-    public void updateBoat(@PathVariable Long boatId, @RequestBody Boat boat) {
-        boatService.updateBoat(boatId, boat);
-    }
+        @PutMapping("/{boatId}")
+        //@PostMapping("/updateBoat")
+        public void updateBoat (@PathVariable Long boatId, @RequestBody Boat boat){
+            boatService.updateBoat(boatId, boat);
+        }
 
-    @DeleteMapping("/{boatId}")
-    public void deleteBoat(@PathVariable Long boatId) {
-        boatService.deleteBoat(boatId);
+        @DeleteMapping("/{boatId}")
+        public void deleteBoat (@PathVariable Long boatId){
+            boatService.deleteBoat(boatId);
+        }
     }
-}

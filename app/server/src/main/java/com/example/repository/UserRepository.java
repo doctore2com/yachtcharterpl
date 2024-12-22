@@ -20,7 +20,6 @@ import java.util.Optional;
 
 }
 
-//   To było późńiej, ale nie wiem skąd to wziałem
 //import com.example.model.User;
 //import org.springframework.data.jpa.repository.JpaRepository;
 //import org.springframework.stereotype.Repository;
