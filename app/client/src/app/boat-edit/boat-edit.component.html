@@ -13,7 +13,7 @@
     <mat-card-actions>
       <button mat-raised-button color="primary" type="submit"
               [disabled]="!boatForm.form.valid">Save</button>
-      <button mat-raised-button color="secondary" (click)="remove(boat.href)"
+      <button mat-raised-button color="accent" (click)="remove(boat.href)"
               *ngIf="boat.href" type="button">Delete</button>
       <a mat-button routerLink="/boat-list">Cancel</a>
     </mat-card-actions>
