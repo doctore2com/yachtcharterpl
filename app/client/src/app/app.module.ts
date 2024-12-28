@@ -22,15 +22,19 @@ import {UserListComponent} from "./user-list/user-list.component";
 import {LoginListComponent} from "./login-list/login-list.component";
 import { BoatDetailsComponent } from './boat-details/boat-details.component';
 import { CharterFormComponent } from './charter-form/charter-form.component';
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     BoatListComponent,
     BoatDetailsComponent,
+    LoginListComponent,
     ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
+    FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
         MatButtonModule,
