@@ -5,8 +5,10 @@ mvn dependency:purge-local-repository
 mvn dependency:resolve
 mvn clean package -Dmaven.test.skip=true
 mvn clean install -U  (w app/server)
-mvn spring-boot:run (w master/yachtcharterpl)
-mvn clean install-DskipTests
+
+mvn clean install -DskipTests 
+mvn spring-boot:run (w master/yachtcharterpl/app/server)
+
 mvn -version
 
 
@@ -20,13 +22,17 @@ docker stop $(docker ps -a -q)
 docker-compose
 docker volume ls
 docker volume rm yacht-charter-mysql-data
-docker-compose -f docker-compose.dev.yml build
-docker-compose -f docker-compose.dev.yml up
+
+docker-compose -f docker-compose.dev.yml up --build  !!!!!
 
 BASH:
 
-net start mysql80
+netstat -aon | find /i "listening"
+tasklist /fi "pid eq 11400"
+taskkill /F /PID 11400
 net stop mysql80
+net start mysql80
+
 
 MYSQL:
 
@@ -123,3 +129,8 @@ ng g c charter-form
 1. Przygotować listę łódek (boat-list), aby się poprawnie wyświetlały z potrzebnymi minimalnymi danymi (w postaci tabeli, jakieś krawędzie, z przyciskiem WYBIERZ)  VVVVV
 2. Wyświetlić daną łódkę (boat-details), aby wyświetlało tylko jeden obiekt z danymi szczegółowymi i przyciskiem zarezerwuj. VVVVV
 3. Spróbować dokończyć charter-form, aby pobrał po boat.id dane łódki z przyciskiem WYCZARTERUJ.
+
+22.12.2024
+
+1. Ports are not available: exposing port TCP 0.0.0.0:8080 -> 0.0.0.0:0: listen tcp 0.0.0.0:8080: bind: Tylko jedno użycie każdego adresu gniazda (protokół/adres sieciowy/port) jest normalnie dozwolone
+2. 

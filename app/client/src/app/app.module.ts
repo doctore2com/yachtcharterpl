@@ -23,41 +23,12 @@ import {LoginListComponent} from "./login-list/login-list.component";
 import { BoatDetailsComponent } from './boat-details/boat-details.component';
 import { CharterFormComponent } from './charter-form/charter-form.component';
 
-const appRoutes: Routes = [
-  { path: '', redirectTo: '/boat-list', pathMatch: 'full' },
-  {
-    path: 'boat-list',
-    component: BoatListComponent
-  },
-  {
-    path: 'boat-add',
-    component: BoatEditComponent
-  },
-  {
-    path: 'boat-edit/:id',
-    component: BoatEditComponent
-  },
-  {
-    path: 'registration',
-    component: UserListComponent
-  },
-  {
-    path: 'login',
-    component: LoginListComponent
-  }
-];
-
-
 @NgModule({
   declarations: [
     AppComponent,
     BoatListComponent,
-    BoatEditComponent,
-    UserListComponent,
-    LoginListComponent,
     BoatDetailsComponent,
-    CharterFormComponent
-  ],
+    ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -68,7 +39,6 @@ const appRoutes: Routes = [
         MatListModule,
         MatToolbarModule,
         FormsModule,
-            RouterModule.forRoot(appRoutes)
   ],
   providers: [BoatService],
   bootstrap: [AppComponent]
