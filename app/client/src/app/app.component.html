@@ -1,9 +1,11 @@
- <mat-toolbar color="primary">
-   <span>Welcome to [(ngModel)]="model.username"!</span>
- </mat-toolbar>
+<mat-toolbar color="primary">
+  <span>Welcome to {{title}}!</span>
+  <a mat-button routerLink="/boats">Lista łodzi</a>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
 
 
- <router-outlet></router-outlet>
 
 
 <!--<nav class="navbar navbar-fixed-top navbar-dark bg-inverse">-->
@@ -17,4 +19,4 @@
 <!--  </div>-->
 <!--</nav>-->
 
-<router-outlet></router-outlet>
+
