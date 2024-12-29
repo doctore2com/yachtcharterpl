@@ -22,12 +22,10 @@
       <div class="card">
         <img class="card-img-top" style="max-height: 200px" [src]="boat.imageSource" [alt]="boat.name">
         <div class="card-body">
-          <h5 class="card-title">boat.name</h5>
-          <p class="card-text">boat.description</p>
-          <p class="card-text">boat.placesInside osób</p>
-          <p class="card-text">boat.priceInTheSeason zł</p>
-<!--              {{charter.startCharter}}-->
-<!--              {{charter.endCharter}} -->
+          <h5 class="card-title">{{boat.name}}</h5>
+          <p class="card-text">{{boat.description}}</p>
+          <p class="card-text">{{boat.placesInside}} osób</p>
+          <p class="card-text">{{boat.priceInTheSeason}} zł</p>
           <button color="primary"
                   [routerLink]="['/charter-form',boat.id]"></button>
           <a href="/charter-form" class="btn btn-primary">Zarezerwuj</a>

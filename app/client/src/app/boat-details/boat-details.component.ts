@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Boat} from "../shared/boat/boat.model";
 import {BoatService} from "../shared/boat/boat.service";
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -9,55 +10,29 @@ import {BoatService} from "../shared/boat/boat.service";
   styleUrls: ['./boat-details.component.css']
 })
 export class BoatDetailsComponent implements OnInit {
-  boat: Boat[] = [];
+  boat: Boat | null = null;
   error = '';
 
 
-  constructor(private boatService: BoatService) {
+
+  constructor(private boatService: BoatService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.loadBoat();
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.loadBoat(id);
+    }
   }
 
-  loadBoat() {
-    this.boatService.getAll().subscribe({
-        next: (data) => {
-          this.boat = data;
-        },
-        error: (err) => {
-          this.error = 'Błąd ładowania';
-        }
+  loadBoat(id: string) {
+    this.boatService.get(id).subscribe({
+      error: (err) => {
+        this.error = 'Błąd ładowania';
+      },
+      next: (data: Boat) => {
+        this.boat = data;
       }
-    )
+    });
   }
-}
-//
-//   set id(value: number) {
-//     this._id = value;
-//   }
-//
-//   boat: Boat[]=[];
-//   error='';
-//   private _id: number;
-//
-//   constructor(private boatService: BoatService) {
-//
-//   }}
-  //
-  // ngOnInit(): void {
-  // this.loadBoat();
-  // }
-  //
-  // loadBoat(id: string){
-  //   this.boatService.get(id).subscribe({
-  //     next:(data)=>{
-  //       this.boat = data;
-  //     },
-  //     error:(err)=>{
-  //       this.error = 'Błąd ładowania';
-  //   }
-  // })
-
-// }
-// }
+  }
