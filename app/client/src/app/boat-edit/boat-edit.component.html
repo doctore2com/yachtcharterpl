@@ -1,26 +1,44 @@
-<mat-card>
-  <form #boatForm="ngForm" (ngSubmit)="save(boatForm.value)">
-    <mat-card-header>
-      <mat-card-title><h2>{{boat.name ? 'Edit' : 'Add'}} Boat</h2></mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <input type="hidden" name="href" [(ngModel)]="boat.href">
-      <mat-form-field>
-        <input matInput placeholder="Boat Name" [(ngModel)]="boat.name"
-               required name="name" #name>
-      </mat-form-field>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit"
-              [disabled]="!boatForm.form.valid">Save</button>
-      <button mat-raised-button color="accent" (click)="remove(boat.href)"
-              *ngIf="boat.href" type="button">Delete</button>
-      <a mat-button routerLink="/boat-list">Cancel</a>
-    </mat-card-actions>
-    <mat-card-footer>
-      <div class="giphy">
-        <img src="{{boat.giphyUrl}}" alt="{{boat.name}}">
-      </div>
-    </mat-card-footer>
+<div class="container mt-4">
+  <form #boatForm="ngForm" (ngSubmit)="save(boatForm)">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          {{boat.id ? 'Edytuj' : 'Dodaj'}} łódź
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Nazwa" [(ngModel)]="boat.name" name="name" required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <textarea matInput placeholder="Opis" [(ngModel)]="boat.description" name="description"></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Producent" [(ngModel)]="boat.manufacturer" name="manufacturer">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput type="number" placeholder="Liczba miejsc" [(ngModel)]="boat.placesInside" name="placesInside">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput type="number" placeholder="Cena w sezonie" [(ngModel)]="boat.priceInTheSeason" name="priceInTheSeason">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="URL zdjęcia" [(ngModel)]="boat.imageSource" name="imageSource">
+        </mat-form-field>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit">
+          {{boat.id ? 'Aktualizuj' : 'Dodaj'}}
+        </button>
+        <button mat-button type="button" [routerLink]="['/boats']">Anuluj</button>
+      </mat-card-actions>
+    </mat-card>
   </form>
-</mat-card>
+</div>

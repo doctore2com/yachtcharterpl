@@ -3,6 +3,7 @@ import {Subscription} from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BoatService } from '../shared/boat/boat.service';
 import { NgForm } from '@angular/forms';
+import {Boat} from "../shared/boat/boat.model";
 
 @Component({
   selector: 'app-boat-edit',
@@ -48,9 +49,16 @@ ngOnDestroy() {
   }
 
   save(form: NgForm) {
-    this.boatService.save(form).subscribe(result => {
-      this.gotoList();
-    }, error => console.error(error));
+    if (form.valid) {
+      const boatData: Boat = {
+        ...this.boat,
+        ...form.value
+      };
+
+      this.boatService.save(boatData).subscribe(result => {
+        this.router.navigate(['/boats']);
+      });
+    }
   }
 
   remove(href) {

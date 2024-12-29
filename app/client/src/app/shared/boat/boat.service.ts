@@ -13,27 +13,26 @@ public BOAT_API = `${this.API}/boats`;
 }
 
 
-getAll(): Observable<any> {
+getAll(): Observable<Boat[]> {
     console.log('Wywołanie getAll, URL:', `${this.BOAT_API}/`);
     return this.http.get<Boat[]>(`${this.BOAT_API}/`);
   }
-  get(id: string) {
-      return this.http.get(this.BOAT_API + '/' + id);
+  get(id: string): Observable<Boat> {
+      return this.http.get<Boat>(this.BOAT_API + '/' + id);
     }
 
-    save(boat: any): Observable<any> {
+    save(boat: Boat): Observable<Boat> {
       console.log('Zapisywanie łodzi:', boat);
       let result: Observable<Object>;
-      if (boat['href']) {
-        result = this.http.put(boat.href, boat);
-      } else {
-        result = this.http.post(this.BOAT_API, boat);
-      }
-      return result;
+      // if (boat['href']) {
+      //   result = this.http.put<Boat>(`${this.BOAT_API}/${boat.id}`, boat);
+      // } else {
+        return this.http.post<Boat>(this.BOAT_API, boat);
+      // }
     }
 
-    remove(href: string) {
-      return this.http.delete(href);
+    remove(id: string): Observable<void> {
+      return this.http.delete<void>(`${this.BOAT_API}/${this.BOAT_API}/${id}`);
     }
     }
 

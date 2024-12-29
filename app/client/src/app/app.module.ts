@@ -1,51 +1,50 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-//import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-
-import { BoatService } from './shared/boat/boat.service';
 import { HttpClientModule } from '@angular/common/http';
-import { BoatListComponent } from './boat-list/boat-list.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { BoatEditComponent } from './boat-edit/boat-edit.component';
 
-
-import { FormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
-import {UserListComponent} from "./user-list/user-list.component";
-import {LoginListComponent} from "./login-list/login-list.component";
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { BoatListComponent } from './boat-list/boat-list.component';
 import { BoatDetailsComponent } from './boat-details/boat-details.component';
-import { CharterFormComponent } from './charter-form/charter-form.component';
-import {AppRoutingModule} from "./app-routing.module";
+import { BoatEditComponent } from './boat-edit/boat-edit.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { LoginListComponent } from './login-list/login-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BoatListComponent,
     BoatDetailsComponent,
-    LoginListComponent,
-    ],
+    BoatEditComponent,
+    UserListComponent,
+    LoginListComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
     BrowserAnimationsModule,
-        MatButtonModule,
-        MatCardModule,
-        MatInputModule,
-        MatListModule,
-        MatToolbarModule,
-        FormsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatListModule,
+    MatToolbarModule
   ],
-  providers: [BoatService],
-  bootstrap: [AppComponent]
+  providers: [],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-
 export class AppModule { }
