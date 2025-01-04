@@ -19,6 +19,7 @@ import { BoatEditComponent } from './boat-edit/boat-edit.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { LoginListComponent } from './login-list/login-list.component';
 import { BoatService } from './shared/boat/boat.service';
+import { BoatAddComponent } from './boat-add/boat-add.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { BoatService } from './shared/boat/boat.service';
     BoatDetailsComponent,
     BoatEditComponent,
     UserListComponent,
-    LoginListComponent
+    LoginListComponent,
+    BoatAddComponent
   ],
   imports: [
     BrowserModule,

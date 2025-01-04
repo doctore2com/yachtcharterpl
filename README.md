@@ -156,3 +156,10 @@ Backend
 28.12.2024
 
 1. Uruchamiać przez komende w cmd docker-compose -f docker-compose.dev.yml up --build (na razie bez uruchomienia poprzez docker-desktop)
+
+
+04.01.2024
+
+1. Boat-edit component i Boat-add component dodać brakujące pola z bazy danych
+2. Rozwiązać błędy po commicie z frontendu 
+3. Podpiąć pod boat-list bootstrapa

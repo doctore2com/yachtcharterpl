@@ -20,7 +20,8 @@
     <div *ngIf="!error" class="row">
       <div *ngFor="let boat of boats" class="col-md-4 mb-4">
         <mat-card class="boat-card">
-          <img mat-card-image [src]="boat.imageSource" [alt]="boat.name">
+          <img mat-card-image [src]="boat.imageSource
+|| '/assets/sasanka.jpg'" [alt]="boat.name">
           <mat-card-header>
             <mat-card-title>{{boat.name}}</mat-card-title>
           </mat-card-header>

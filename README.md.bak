@@ -11,6 +11,7 @@ mvn spring-boot:run (w master/yachtcharterpl/app/server)
 
 mvn -version
 
+npm install
 
 
 DOCKER:
@@ -150,4 +151,8 @@ Backend
 22.12.2024
 
 1. Ports are not available: exposing port TCP 0.0.0.0:8080 -> 0.0.0.0:0: listen tcp 0.0.0.0:8080: bind: Tylko jedno użycie każdego adresu gniazda (protokół/adres sieciowy/port) jest normalnie dozwolone
-2. 
+
+
+28.12.2024
+
+1. Uruchamiać przez komende w cmd docker-compose -f docker-compose.dev.yml up --build (na razie bez uruchomienia poprzez docker-desktop)
