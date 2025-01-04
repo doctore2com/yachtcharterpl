@@ -130,6 +130,23 @@ ng g c charter-form
 2. Wyświetlić daną łódkę (boat-details), aby wyświetlało tylko jeden obiekt z danymi szczegółowymi i przyciskiem zarezerwuj. VVVVV
 3. Spróbować dokończyć charter-form, aby pobrał po boat.id dane łódki z przyciskiem WYCZARTERUJ.
 
+
+21.12.2024
+
+Książka 
+
+1. BPMN, UML, Diagram sekwencji (relacje miedzy klasami, relacje w bazie)
+2. Tematyka jachtów (opisać funkcjonalności z poziomu kontekstu biznesowego)
+3. JPA (opisać co nam daje)
+
+Do zrobienia: 
+
+Backend
+
+1. Zwracanie obiektów zamiast void
+2. Testowanie - postman (nie było potrzeby robić testów jednostkowych, robiłem testy manualne w postmanie)
+3. Kolekcje (w Postmanie opracować odpowiednio na projekt yacht)
+
 22.12.2024
 
 1. Ports are not available: exposing port TCP 0.0.0.0:8080 -> 0.0.0.0:0: listen tcp 0.0.0.0:8080: bind: Tylko jedno użycie każdego adresu gniazda (protokół/adres sieciowy/port) jest normalnie dozwolone

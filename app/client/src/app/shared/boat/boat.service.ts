@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Boat } from "./boat.model";
 
-@Injectable()
+@Injectable({providedIn:'root'})
 export class BoatService {
 
 public API = 'http://localhost:8080';

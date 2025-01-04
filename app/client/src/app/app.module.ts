@@ -18,6 +18,7 @@ import { BoatDetailsComponent } from './boat-details/boat-details.component';
 import { BoatEditComponent } from './boat-edit/boat-edit.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { LoginListComponent } from './login-list/login-list.component';
+import { BoatService } from './shared/boat/boat.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { LoginListComponent } from './login-list/login-list.component';
     MatListModule,
     MatToolbarModule
   ],
-  providers: [],
+  providers: [BoatService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
