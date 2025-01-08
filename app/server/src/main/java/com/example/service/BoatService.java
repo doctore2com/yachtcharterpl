@@ -4,6 +4,8 @@ import  com.example.boat.Boat;
 import com.example.repository.BoatRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import java.util.Map;
 
 import java.util.List;
 
@@ -21,6 +23,28 @@ public class  BoatService {
     public Boat getBoat(Long id) {
         return boatRepository.findById(id).get();
     }
+
+
+    public Boat addBoat(MultipartFile file, Map<String, String> boatData){
+        try {
+            Boat boat = createBoatFromData(boatData);
+
+            return boatRepository.save(boat);
+        } catch (Exception e) {
+            throw new RuntimeException("Blad podczas dodawania lodzi",e);
+        }
+    }
+
+    public Boat createBoatFromData(Map<String, String> boatData){
+        Boat boat = new Boat();
+        boat.setName(boatData.get("name"));
+
+//        # TODO
+        return boat;
+    }
+
+
+
 
     public void addBoat(Boat boat) {
         boatRepository.save(boat);
