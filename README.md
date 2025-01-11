@@ -169,3 +169,10 @@ Backend
 1. Podpiąć pod boat-list bootstrapa
 2. Dokończyć #TODO
 3. Poprawić jeden błąd
+
+11.01.2025
+
+1. Usunąć targer folder
+2. mvn clean install
+3. build 
+4. sprawdzić błędy 

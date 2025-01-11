@@ -1,38 +1,57 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 import { Boat } from "./boat.model";
 
 @Injectable({providedIn:'root'})
 export class BoatService {
 
-public API = 'http://localhost:8080';
-public BOAT_API = `${this.API}/boats`;
+  public API = 'http://localhost:8080';
+  public BOAT_API = `${this.API}/boats`;
 
   constructor(private http: HttpClient) {
-}
+  }
 
 
-getAll(): Observable<Boat[]> {
+  getAll(): Observable<Boat[]> {
     console.log('Wywołanie getAll, URL:', `${this.BOAT_API}/`);
     return this.http.get<Boat[]>(`${this.BOAT_API}/`);
   }
   get(id: string): Observable<Boat> {
-      return this.http.get<Boat>(this.BOAT_API + '/' + id);
-    }
+    return this.http.get<Boat>(this.BOAT_API + '/' + id);
+  }
 
-    save(boat: Boat): Observable<Boat> {
-      console.log('Zapisywanie łodzi:', boat);
-      let result: Observable<Object>;
-      // if (boat['href']) {
-      //   result = this.http.put<Boat>(`${this.BOAT_API}/${boat.id}`, boat);
-      // } else {
-        return this.http.post<Boat>(this.BOAT_API, boat);
-      // }
-    }
+  save(boat: Boat): Observable<Boat> {
+    console.log('=== Rozpoczęcie zapisywania łodzi ===');
+    console.log('Dane łodzi:', boat);
 
-    remove(id: string): Observable<void> {
-      return this.http.delete<void>(`${this.BOAT_API}/${this.BOAT_API}/${id}`);
-    }
-    }
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
 
+    return this.http.post<Boat>(this.BOAT_API, boat, {
+      headers: headers
+    }).pipe(
+      tap(response => console.log('Odpowiedź:', response)),
+      catchError(this.handleError)
+    );
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    console.error('=== Błąd podczas zapisu ===');
+    if (error.error instanceof ErrorEvent) {
+      // Błąd po stronie klienta
+      console.error('Błąd klienta:', error.error.message);
+    } else {
+      // Błąd po stronie serwera
+      console.error(
+        `Kod błędu: ${error.status}, ` +
+        `Treść: ${error.error}`);
+    }
+    console.error('Pełny obiekt błędu:', error);
+    return throwError(() => new Error('Wystąpił problem podczas zapisywania łodzi. Spróbuj ponownie później.'));
+  }
+
+  remove(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.BOAT_API}/${this.BOAT_API}/${id}`);
+  }
+}

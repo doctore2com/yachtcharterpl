@@ -85,14 +85,6 @@
             </mat-form-field>
           </div>
         </div>
-
-        <div class="image-upload">
-          <input type="file" (change)="onFileSelected($event)" accept="image/*" #fileInput>
-          <button type="button" mat-raised-button (click)="fileInput.click()">
-            Wybierz zdjęcie
-          </button>
-          <img *ngIf="previewUrl" [src]="previewUrl" class="image-preview">
-        </div>
       </mat-card-content>
 
       <mat-card-actions>

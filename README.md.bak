@@ -161,5 +161,11 @@ Backend
 04.01.2024
 
 1. Boat-edit component i Boat-add component dodać brakujące pola z bazy danych  VVVVV
-2. Rozwiązać błędy po commicie z frontendu 
+2. Rozwiązać błędy po commicie z frontendu VVVV
 3. Podpiąć pod boat-list bootstrapa
+
+07.01.2024
+
+1. Podpiąć pod boat-list bootstrapa
+2. Dokończyć #TODO
+3. Poprawić jeden błąd

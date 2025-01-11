@@ -38,6 +38,19 @@ public class  BoatService {
     public Boat createBoatFromData(Map<String, String> boatData){
         Boat boat = new Boat();
         boat.setName(boatData.get("name"));
+        boat.setBunk(boatData.get("bunk"));
+        boat.setCabins(boatData.get("cabins"));
+        boat.setDescription(boatData.get("description"));
+        boat.setDistance(boatData.get("distance"));
+        boat.setImageSource(boatData.get("image_source"));
+        boat.setLandlord(boatData.get("landlord"));
+        boat.setManufacturer(boatData.get("manufacturer"));
+        boat.setOpinions(boatData.get("opinions"));
+        boat.setPlacesInside(boatData.get("places_inside"));
+        boat.setPower(boatData.get("power"));
+        boat.setPriceInTheSeason(boatData.get("price_in_the_season"));
+        boat.setPriceOutOfSeason(boatData.get("price_out_of_season"));
+        boat.setYear(boatData.get("year"));
 
 //        # TODO
         return boat;
