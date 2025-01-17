@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CharterFormComponent implements OnInit {
 
-  constructor() { }
+  charterForm: FormGoup;
+  boatId: number;
+
+
+  constructor(
+    private fb: FormBuilder,
+    private route: ActiveRoute,
+    private router: Router,
+    private charterService: CharterService
+    #TODO
+  ) { }
 
   ngOnInit(): void {
+    this.boatId = Number(this.router.snapshot.paramMap.get('boatID')); // to moze byc zle
   }
 
 }

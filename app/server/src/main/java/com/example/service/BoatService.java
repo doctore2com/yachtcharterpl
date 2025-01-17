@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.Map;
 
+
 import java.util.List;
 
 @Service
@@ -38,21 +39,19 @@ public class  BoatService {
     public Boat createBoatFromData(Map<String, String> boatData){
         Boat boat = new Boat();
         boat.setName(boatData.get("name"));
-        boat.setBunk(boatData.get("bunk"));
-        boat.setCabins(boatData.get("cabins"));
+        boat.setBunk(Integer.parseInt(boatData.get("bunk")));
+        boat.setCabins(Integer.parseInt(boatData.get("cabins")));
         boat.setDescription(boatData.get("description"));
-        boat.setDistance(boatData.get("distance"));
+        boat.setDistance(Integer.parseInt(boatData.get("distance")));
         boat.setImageSource(boatData.get("image_source"));
         boat.setLandlord(boatData.get("landlord"));
         boat.setManufacturer(boatData.get("manufacturer"));
         boat.setOpinions(boatData.get("opinions"));
-        boat.setPlacesInside(boatData.get("places_inside"));
-        boat.setPower(boatData.get("power"));
-        boat.setPriceInTheSeason(boatData.get("price_in_the_season"));
-        boat.setPriceOutOfSeason(boatData.get("price_out_of_season"));
-        boat.setYear(boatData.get("year"));
-
-//        # TODO
+        boat.setPlacesInside(Integer.parseInt(boatData.get("places_inside")));
+        boat.setPower(Integer.parseInt(boatData.get("power")));
+        boat.setPriceInTheSeason(Integer.parseInt(boatData.get("price_in_the_season")));
+        boat.setPriceOutOfSeason(Integer.parseInt(boatData.get("price_out_of_season")));
+        boat.setYear(Integer.parseInt(boatData.get("year")));
         return boat;
     }
 

@@ -12,9 +12,9 @@
           <p class="card-text">{{boat.description}}</p>
           <p class="card-text">{{boat.placesInside}} osób</p>
           <p class="card-text">{{boat.priceInTheSeason}} zł</p>
-          <a [routerLink]="['/charter-form', boat.id]" class="btn btn-primary">
+          <button mat-raised-button color="primary" [routerLink]="['/charter-form', boat.id]">
             Zarezerwuj
-          </a>
+          </button>
         </div>
       </div>
     </div>

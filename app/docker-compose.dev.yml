@@ -9,12 +9,22 @@ services:
       volumes:
         - ./client:/app
         - /app/node_modules
-      command: bash -c "npm install && npm start -- --poll=2000 --host 0.0.0.0"
+      command: >
+        sh -c "
+          echo 'Waiting for backend...' &&
+          while ! nc -z server 8080; do
+            sleep 1
+          done &&
+          echo 'Backend is up!' &&
+          npm install &&
+          npm start -- --poll=2000 --host 0.0.0.0
+        "
       environment:
         - WATCHPACK_POLLING=true
         - CHOKIDAR_USEPOLLING=true
       depends_on:
-        - server
+        server:
+          condition: service_healthy
       networks:
         - yacht-net
 
@@ -39,6 +49,12 @@ services:
       - SPRING_DEVTOOLS_LIVERELOAD_ENABLED=true
     networks:
       - yacht-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
     restart: unless-stopped
 
 networks:

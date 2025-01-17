@@ -20,11 +20,13 @@ import { UserListComponent } from './user-list/user-list.component';
 import { LoginListComponent } from './login-list/login-list.component';
 import { BoatService } from './shared/boat/boat.service';
 import { BoatAddComponent } from './boat-add/boat-add.component';
+import { CharterFormComponent } from './charter-form/charter-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BoatListComponent,
+    CharterFormComponent,
     BoatDetailsComponent,
     BoatEditComponent,
     UserListComponent,

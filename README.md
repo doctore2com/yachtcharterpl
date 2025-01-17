@@ -166,13 +166,18 @@ Backend
 
 07.01.2024
 
-1. Podpiąć pod boat-list bootstrapa
-2. Dokończyć #TODO
-3. Poprawić jeden błąd
+1. Podpiąć pod boat-list bootstrapa 
+2. Dokończyć #TODO  VVVVV
+3. Poprawić jeden błąd VVVVV
 
 11.01.2025
 
-1. Usunąć targer folder
-2. mvn clean install
-3. build 
-4. sprawdzić błędy 
+1. Usunąć targer folder  VVVVV
+2. mvn clean install   VVVVV
+3. build VVVVV
+4. sprawdzić błędy VVVVV
+
+17.01.2025
+
+1. Dokończyć #TODO w odniesieniu do Boat-Add
+
