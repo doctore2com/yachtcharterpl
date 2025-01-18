@@ -28,10 +28,12 @@ export class BoatDetailsComponent implements OnInit {
   loadBoat(id: string) {
     this.boatService.get(id).subscribe({
       error: (err) => {
+        console.log('Blad ladowania lodzi', err);
         this.error = 'Błąd ładowania';
       },
       next: (data: Boat) => {
         this.boat = data;
+        console.log("Zaladowana lodka", this.boat)
       }
     });
   }

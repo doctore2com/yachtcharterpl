@@ -6,6 +6,7 @@ describe('CharterFormComponent', () => {
   let component: CharterFormComponent;
   let fixture: ComponentFixture<CharterFormComponent>;
 
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ CharterFormComponent ]

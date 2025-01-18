@@ -4,4 +4,7 @@ export interface Charter {
   usrId: number;
   startDate: Date;
   endDate: Date;
+  name?: string;
+  description?: string;
+  port?: string;
 }

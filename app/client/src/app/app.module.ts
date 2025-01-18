@@ -6,10 +6,11 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
+
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +22,10 @@ import { LoginListComponent } from './login-list/login-list.component';
 import { BoatService } from './shared/boat/boat.service';
 import { BoatAddComponent } from './boat-add/boat-add.component';
 import { CharterFormComponent } from './charter-form/charter-form.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { CharterService } from './services/charter.service';
+
 
 @NgModule({
   declarations: [
@@ -46,9 +51,13 @@ import { CharterFormComponent } from './charter-form/charter-form.component';
     MatInputModule,
     MatFormFieldModule,
     MatListModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
-  providers: [BoatService],
+  providers: [BoatService, CharterService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
