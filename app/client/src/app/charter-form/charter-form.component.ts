@@ -31,7 +31,6 @@ export class CharterFormComponent implements OnInit {
       port: ['', Validators.required],
       boatId: ['']
     })
-
   }
 
   ngOnInit(): void {

@@ -6,19 +6,24 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.util.Set;
+import java.util.HashSet;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "boat")
 public class Boat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="boatName")
+
+    @Column(name = "boat_name")
     private String name;
+
     private String description;
     private String opinions;
     private String landlord;
@@ -32,6 +37,7 @@ public class Boat {
     private int year;
     private int power;
     private int distance;
-    @ManyToOne
-    private Charter charter;
+
+    @OneToMany(mappedBy = "boat", cascade = CascadeType.ALL)
+    private Set<Charter> charters = new HashSet<>();
 }

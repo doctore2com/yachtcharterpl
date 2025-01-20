@@ -67,7 +67,7 @@ public class  BoatService {
         boat.setName(boatDetails.getName());
         boat.setDescription(boatDetails.getDescription());
         boat.setBunk(boatDetails.getBunk());
-        boat.setCharter(boatDetails.getCharter());
+        boat.setCharters(boatDetails.getCharters());
         boat.setCabins(boatDetails.getCabins());
         boat.setDistance(boatDetails.getDistance());
         boat.setImageSource(boatDetails.getImageSource());
@@ -79,14 +79,12 @@ public class  BoatService {
         boat.setPriceInTheSeason(boatDetails.getPriceInTheSeason());
         boat.setPriceOutOfSeason(boatDetails.getPriceOutOfSeason());
         boat.setYear(boatDetails.getYear());
-        boat.setCharter(boatDetails.getCharter());
-        // #1 uzupelnic pozostale pola
+        boat.setCharters(boatDetails.getCharters());
         boatRepository.save(boat);
     }
 
     public void deleteBoat(Long id) {
-        Boat boat = boatRepository.findById(id).get();
-        boatRepository.delete(boat);
-
+        boatRepository.findById(id)
+                .ifPresent(boatRepository::delete);
    }
 }
