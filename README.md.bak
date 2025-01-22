@@ -177,3 +177,21 @@ Backend
 3. build VVVVV
 4. sprawdzić błędy VVVVV
 
+17.01.2025
+
+1. Dokończyć #TODO w odniesieniu do Boat-Add
+
+20.01.2025
+
+1. mvc mikroserwisowo, REST API, SPA
+
+Backend komunikacja przez api (mvc z replus baza danych)
+Frontend SPA 
+
+
+wzięte z DDD (domain driven desaing). wprowadzenie warstwy abstrakcji na bazie danych. baza dnaych moze zmieniać się wraz z rozwojem potrzeb po stronie logiki biznesowej.
+
+MySQL Bench pobrać
+
+
+2. do instrukcji Docker compose up (ksiązka)

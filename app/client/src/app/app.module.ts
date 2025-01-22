@@ -25,6 +25,8 @@ import { CharterFormComponent } from './charter-form/charter-form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CharterService } from './services/charter.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CharterListComponent } from './charter-list/charter-list.component';
 
 
 @NgModule({
@@ -36,7 +38,8 @@ import { CharterService } from './services/charter.service';
     BoatEditComponent,
     UserListComponent,
     LoginListComponent,
-    BoatAddComponent
+    BoatAddComponent,
+    CharterListComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +59,7 @@ import { CharterService } from './services/charter.service';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSnackBarModule
   ],
   providers: [BoatService, CharterService],
   bootstrap: [AppComponent],

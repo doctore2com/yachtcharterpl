@@ -1,72 +1,73 @@
 <div class="container">
   <mat-card>
     <mat-card-header>
-  <h2>Rezerwacja czarteru</h2>
-      </mat-card-header>
+      <mat-card-title>Formularz rezerwacji</mat-card-title>
+    </mat-card-header>
 
+    <mat-card-content>
+      <form [formGroup]="charterForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nazwa rezerwacji</mat-label>
+          <input matInput formControlName="name" required>
+          <mat-error *ngIf="charterForm.get('name')?.hasError('required')">
+            Nazwa rezerwacji jest wymagana
+          </mat-error>
+        </mat-form-field>
 
-  <form [formGroup]="charterForm" (ngSubmit)="onSubmit()" class="boat-form">
-      <mat-card-content>
-        <div class="form-row">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Opis</mat-label>
+          <textarea matInput formControlName="description" rows="3"></textarea>
+        </mat-form-field>
 
-
+        <div class="date-fields">
           <mat-form-field appearance="outline">
             <mat-label>Data rozpoczęcia</mat-label>
-            <input matInput [matDatepicker]="startPicker" formControlName="startDate">
+            <input matInput [matDatepicker]="startPicker" formControlName="startCharter" [min]="today" required>
             <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
             <mat-datepicker #startPicker></mat-datepicker>
-            <mat-error *ngIf="charterForm.get('startDate')?.hasError('required')">
+            <mat-error *ngIf="charterForm.get('startCharter')?.hasError('required')">
               Data rozpoczęcia jest wymagana
             </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Data zakończenia</mat-label>
-            <input matInput [matDatepicker]="endPicker" formControlName="endDate">
+            <input matInput [matDatepicker]="endPicker" formControlName="endCharter"
+                   [min]="charterForm.get('startCharter')?.value || today" required>
             <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
             <mat-datepicker #endPicker></mat-datepicker>
-            <mat-error *ngIf="charterForm.get('endDate')?.hasError('required')">
+            <mat-error *ngIf="charterForm.get('endCharter')?.hasError('required')">
               Data zakończenia jest wymagana
             </mat-error>
           </mat-form-field>
-
-
-          <mat-form-field appearance="outline">
-            <mat-label>Nazwa rezerwacji</mat-label>
-            <input matInput formControlName="name" required>
-            <mat-error *ngIf="charterForm.get('name')?.hasError('required')">
-              Nazwa jest wymagana
-            </mat-error>
-          </mat-form-field>
-
-
-
-
-          <mat-form-field appearance="outline">
-            <mat-label>Port</mat-label>
-            <input matInput formControlName="port">
-            <mat-error *ngIf="charterForm.get('port')?.hasError('required')">
-              Port jest wymagany
-            </mat-error>
-          </mat-form-field>
-
-
-          <mat-form-field appearance="outline">
-            <mat-label>Opis</mat-label>
-            <textarea matInput formControlName="description" required rows="3"></textarea>
-            <mat-error *ngIf="charterForm.get('description')?.hasError('required')">
-              Opis jest wymagany
-            </mat-error>
-          </mat-form-field>
         </div>
-      </mat-card-content>
 
-      <mat-card-actions>
-        <button mat-raised-button color="primary" type="submit" [disabled]="!charterForm.valid">
-          Zarezerwuj
-        </button>
-        <button mat-button type="button" routerLink="/boats">Anuluj</button>
-      </mat-card-actions>
-  </form>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Port</mat-label>
+          <input matInput formControlName="port" required>
+          <mat-error *ngIf="charterForm.get('port')?.hasError('required')">
+            Port jest wymagany
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Debug info -->
+        <div class="debug-info" *ngIf="charterForm.invalid">
+          <p>Formularz zawiera błędy:</p>
+          <ul>
+            <li *ngIf="charterForm.get('name')?.invalid">Nazwa rezerwacji jest wymagana</li>
+            <li *ngIf="charterForm.get('startCharter')?.invalid">Data rozpoczęcia jest wymagana</li>
+            <li *ngIf="charterForm.get('endCharter')?.invalid">Data zakończenia jest wymagana</li>
+            <li *ngIf="charterForm.get('port')?.invalid">Port jest wymagany</li>
+          </ul>
+        </div>
+
+        <div class="button-row">
+          <button mat-button type="button" routerLink="/boats">Anuluj</button>
+          <button mat-raised-button color="primary" type="submit">
+            Zarezerwuj
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
   </mat-card>
 </div>

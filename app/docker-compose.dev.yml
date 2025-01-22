@@ -31,17 +31,47 @@ services:
       - ~/.m2:/root/.m2
     environment:
       - SPRING_PROFILES_ACTIVE=dev
-      - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/yacht_charter?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/yacht_charter?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       - SPRING_JPA_SHOW_SQL=true
       - SPRING_DEVTOOLS_RESTART_ENABLED=true
       - SPRING_DEVTOOLS_LIVERELOAD_ENABLED=true
+      - SPRING_JPA_DEFER_DATASOURCE_INITIALIZATION=true
+      - SPRING_SQL_INIT_MODE=always
     networks:
       - yacht-net
+    depends_on:
+      mysql:
+        condition: service_healthy
     restart: unless-stopped
+
+  mysql:
+    image: mysql:8.0
+    container_name: yacht-charter-mysql
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=yacht_charter
+      - MYSQL_USER=springuser
+      - MYSQL_PASSWORD=root
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./server/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - yacht-net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    command: --init-file /docker-entrypoint-initdb.d/init.sql
 
 networks:
   yacht-net:
     driver: bridge
+
+volumes:
+  mysql_data:
