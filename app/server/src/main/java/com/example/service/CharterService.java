@@ -31,9 +31,13 @@ public class CharterService {
         return overlappingCharters.isEmpty();
     }
 
+
     public List<Charter> getAllCharters(){
+
         return charterRepository.findAll();
     }
+
+
 
     public Charter getCharter(Long id) {
         return charterRepository.findById(id).get();

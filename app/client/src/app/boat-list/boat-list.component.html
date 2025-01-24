@@ -12,20 +12,20 @@
 </div>
 <div class="container">
   <div class="row">
-  <div class="container">
+    <div class="container">
       <div *ngIf="error" class="error-message">
         {{error}}
       </div>
     </div>
     <div *ngIf="!error" class="row">
-      <div *ngFor="let boat of boats" class="col-md-4 mb-4">
-        <mat-card class="boat-card">
-          <img mat-card-image [src]="boat.imageSource
-|| '/assets/sasanka.jpg'" [alt]="boat.name">
+      <div class="boats-grid">
+        <mat-card *ngFor="let boat of boats">
           <mat-card-header>
-            <mat-card-title>{{boat.name}}</mat-card-title>
+            <mat-card-title>{{ boat.name }}</mat-card-title>
           </mat-card-header>
           <mat-card-content>
+            <img mat-card-image [src]="boat.imageSource
+|| '/assets/sasanka.jpg'" [alt]="boat.name">
             <p>{{boat.description}}</p>
             <p><strong>Miejsca:</strong> {{boat.placesInside}}</p>
             <p><strong>Cena:</strong> {{boat.priceInTheSeason}} zł</p>
@@ -34,15 +34,20 @@
             <button mat-button [routerLink]="['/boat-details', boat.id]">
               Szczegóły
             </button>
+            <button mat-button color="primary" [routerLink]="['/charter-form', boat.id]">
+              Zarezerwuj
+            </button>
+            <button mat-button color="warn" (click)="deleteBoat(boat.id)">
+              Usuń
+            </button>
           </mat-card-actions>
         </mat-card>
       </div>
     </div>
-    </div>
   </div>
+</div>
 
-
-
-
-
+<button mat-fab color="primary" class="add-button" routerLink="/boat-add">
+  <mat-icon>add</mat-icon>
+</button>
 

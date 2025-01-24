@@ -4,7 +4,7 @@ import com.example.charter.Charter;
 import com.example.service.CharterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 
@@ -17,11 +17,11 @@ public class CharterController {
     private CharterService charterService;
 
     @GetMapping
-    public List<Charter> getAllCharters() {
+    public ResponseEntity <List<Charter>> getAllCharters() {
         System.out.println("Pobieranie wszystkich rezerwacji");
         List<Charter> charters = charterService.getAllCharters();
         System.out.println("Znalezione rezerwacje: " + charters.size());
-        return charters;
+        return ResponseEntity.ok(charters);
     }
 
     @GetMapping("/{charterId}")

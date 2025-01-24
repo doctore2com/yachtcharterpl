@@ -7,8 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @RestController
 @RequestMapping("/boats")
@@ -51,7 +54,13 @@ public class BoatController {
     }
 
     @DeleteMapping("/{boatId}")
-    public void deleteBoat(@PathVariable Long boatId) {
-        boatService.deleteBoat(boatId);
+    public ResponseEntity<Void> deleteBoat(@PathVariable Long boatId) {
+        try{
+            boatService.deleteBoat(boatId);
+            return ResponseEntity.ok().build();
+        } catch (Exception e){
+            return ResponseEntity.notFound().build();
+        }
+
     }
 }
