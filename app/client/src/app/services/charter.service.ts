@@ -1,6 +1,6 @@
 import {HttpClient} from "@angular/common/http";
 import { Injectable } from '@angular/core';
-import {map, Observable} from "rxjs";
+import {map, Observable, tap} from "rxjs";
 import {Charter} from "../models/charter.model";
 
 
@@ -15,17 +15,21 @@ export class CharterService{
   }
 
   createCharter(charter: Charter):Observable<Charter>{
-    console.log('Wysylam dane do bazy', charter);
+    console.log('Wysyłam dane do bazy:', charter);
     return this.http.post<Charter>(this.apiUrl,charter);
   }
 
   getAllCharters(): Observable<Charter[]> {
-    return this.http.get<Charter[]>(this.apiUrl)
-      .pipe(
-        map(response => {
-          console.log('Surowa odpowiedź:', response);
-          return Array.isArray(response) ? response : [];
-        })
-      );
+    return this.http.get<Charter[]>(this.apiUrl).pipe(
+      tap(response => console.log('Surowa odpowiedź z serwera:', response)),
+      map(response => {
+        if (!Array.isArray(response)) {
+          console.error('Odpowiedź nie jest tablicą:', response);
+          return [];
+        }
+        return response;
+      }),
+      tap(charters => console.log('Przetworzone rezerwacje:', charters))
+    );
   }
 }

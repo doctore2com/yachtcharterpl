@@ -186,14 +186,18 @@ Backend
 1. mvc mikroserwisowo, REST API, SPA
 
 Backend komunikacja przez api (mvc z repo plus baza danych)  VVVVV
-Frontend SPA 
+Frontend SPA  VVVVV
 
 
 wzięte z DDD (domain driven desaing). wprowadzenie warstwy abstrakcji na bazie danych. baza dnaych moze zmieniać się wraz z rozwojem potrzeb po stronie logiki biznesowej.
 
 MySQL Bench pobrać
-
+ 
 
 2. do instrukcji Docker compose up (ksiązka)
 
 3. Pobierz Docker desktop i Docker compose (dodać do instrukcji przy pobieraniu).
+
+
+Pliki inicjalizujące do bazy danych (Copy/Paste)  - gdzieś to dodać do książki
+Mockup użytkownika (makiety użytkownika) - to także dodać do ksiązki

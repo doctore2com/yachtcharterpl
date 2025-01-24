@@ -1,4 +1,4 @@
-package com.example.boat;
+ package com.example.boat;
 
 import com.example.charter.Charter;
 import javax.persistence.*;

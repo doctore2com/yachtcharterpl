@@ -16,9 +16,12 @@ public class CharterController {
     @Autowired
     private CharterService charterService;
 
-    @GetMapping("/")
+    @GetMapping
     public List<Charter> getAllCharters() {
-        return charterService.getAllCharters();
+        System.out.println("Pobieranie wszystkich rezerwacji");
+        List<Charter> charters = charterService.getAllCharters();
+        System.out.println("Znalezione rezerwacje: " + charters.size());
+        return charters;
     }
 
     @GetMapping("/{charterId}")
