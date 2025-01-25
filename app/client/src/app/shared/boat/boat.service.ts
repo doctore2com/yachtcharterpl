@@ -54,4 +54,24 @@ export class BoatService {
   remove(id: string): Observable<void> {
     return this.http.delete<void>(`${this.BOAT_API}/${this.BOAT_API}/${id}`);
   }
+
+  deleteBoat(id: number): Observable<void>{
+      return this.http.delete<void>(`${this.BOAT_API}/${id}`).pipe(
+          tap(() => console.log(`Usunieto łódź o id: ${id}`)),
+          catchError(error=> {
+          console.error('Błąd podczas usuwania łodzi:', error);
+          return throwError(() => error);
+      })
+  );
+  }
+
+  updateBoat(id: number, boat: Boat): Observable<Boat> {
+    return this.http.put<Boat>(`${this.BOAT_API}/${id}`, boat).pipe(
+      tap(response => console.log('Zaktualizowano łódź:', response)),
+      catchError(error => {
+        console.error('Błąd podczas aktualizacji łodzi:', error);
+        return throwError(() => error);
+      })
+    );
+  }
 }

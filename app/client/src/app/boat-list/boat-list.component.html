@@ -34,8 +34,8 @@
             <button mat-button [routerLink]="['/boat-details', boat.id]">
               Szczegóły
             </button>
-            <button mat-button color="primary" [routerLink]="['/charter-form', boat.id]">
-              Zarezerwuj
+            <button mat-button [routerLink]="['/boat-edit', boat.id]">
+              Edytuj
             </button>
             <button mat-button color="warn" (click)="deleteBoat(boat.id)">
               Usuń

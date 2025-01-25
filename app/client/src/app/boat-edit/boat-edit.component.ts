@@ -1,75 +1,84 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import {Subscription} from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BoatService } from '../shared/boat/boat.service';
-import { NgForm } from '@angular/forms';
-import {Boat} from "../shared/boat/boat.model";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-boat-edit',
   templateUrl: './boat-edit.component.html',
   styleUrls: ['./boat-edit.component.css']
 })
-export class BoatEditComponent implements OnInit, OnDestroy {
+export class BoatEditComponent implements OnInit {
+  boatForm: FormGroup;
+  boatId: number;
 
-boat: any = {};
-
-  sub: Subscription;
-
-  constructor(private route: ActivatedRoute,
-              private router: Router,
-              private boatService: BoatService)
-                                           {
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private boatService: BoatService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {
+    this.initForm();
   }
 
+  private initForm() {
+    this.boatForm = this.fb.group({
+      name: ['', Validators.required],
+      description: [''],
+      manufacturer: ['', Validators.required],
+      placesInside: ['', Validators.required],
+      priceInTheSeason: ['', Validators.required],
+      priceOutOfSeason: [''],
+      year: [''],
+      power: [''],
+      distance: ['']
+    });
+  }
 
   ngOnInit() {
-                this.sub = this.route.params.subscribe(params => {
-                  const id = params['id'];
-                  if (id) {
-                    this.boatService.get(id).subscribe((boat: any) => {
-                      if (boat) {
-                        this.boat = boat;
-                        this.boat.href = boat._links.self.href;
-                        } else {
-                        console.log(`Boat with id '${id}' not found, returning to list`);
-                        this.gotoList();
-                      }
-                    });
-                  }
-                });
-              }
-
-ngOnDestroy() {
-    this.sub.unsubscribe();
-  }
-
-  gotoList() {
-    this.router.navigate(['/boat-list']);
-  }
-
-  save(form: NgForm) {
-    if (form.valid) {
-      const boatData: Boat = {
-        ...this.boat,
-        ...form.value
-      };
-
-      this.boatService.save(boatData).subscribe(result => {
-        this.router.navigate(['/boats']);
-      });
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.boatId = +id;
+      this.loadBoatData();
     }
   }
 
-  remove(href) {
-    this.boatService.remove(href).subscribe(result => {
-      this.gotoList();
-    }, error => console.error(error));
+  loadBoatData() {
+    this.boatService.get(this.boatId.toString()).subscribe({
+      next: (boat) => {
+        this.boatForm.patchValue({
+          name: boat.name,
+          description: boat.description,
+          manufacturer: boat.manufacturer,
+          placesInside: boat.placesInside,
+          priceInTheSeason: boat.priceInTheSeason,
+          priceOutOfSeason: boat.priceOutOfSeason,
+          year: boat.year,
+          power: boat.power,
+          distance: boat.distance
+        });
+      },
+      error: (error) => {
+        console.error('Błąd podczas ładowania danych łodzi:', error);
+        this.snackBar.open('Błąd podczas ładowania danych łodzi', 'OK', { duration: 3000 });
+      }
+    });
+  }
+
+  onSubmit() {
+    if (this.boatForm.valid) {
+      this.boatService.updateBoat(this.boatId, this.boatForm.value).subscribe({
+        next: () => {
+          this.snackBar.open('Łódź została zaktualizowana', 'OK', { duration: 3000 });
+          this.router.navigate(['/boats']);
+        },
+        error: (error) => {
+          console.error('Błąd podczas aktualizacji łodzi:', error);
+          this.snackBar.open('Błąd podczas aktualizacji łodzi', 'OK', { duration: 3000 });
+        }
+      });
+    }
   }
 }
-
-
-
-
-
-

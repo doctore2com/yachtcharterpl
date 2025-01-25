@@ -51,6 +51,7 @@ export class BoatListComponent implements OnInit {
           this.snackBar.open('Jacht został usunięty', 'OK', { duration: 3000 });
         },
         error: (error) => {
+          console.error("Błąd podczas usuwania łodzi", error);
           this.snackBar.open('Błąd podczas usuwania jachtu', 'OK', { duration: 3000 });
         }
       });
