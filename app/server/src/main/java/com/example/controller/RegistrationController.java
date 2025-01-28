@@ -67,7 +67,7 @@ public class RegistrationController {
         return userService.getUser(userId);
     }
 
-    @PostMapping("/addUser")
+    @PostMapping("/")
     public void addUser(@RequestBody User user) {
         userService.addUser(user);
     }

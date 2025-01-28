@@ -22,10 +22,10 @@ public class BoatController {
     @Autowired
     private BoatService boatService;
 
-    @GetMapping("/")
+    @GetMapping
     public List<Boat> getAllBoats() {
         List<Boat> boats = boatService.getAllBoats();
-        System.out.println("Controller returned boats: " + boats.size()); // debugging
+        log.info("Returning {} boats", boats.size());
         return boats;
     }
 
@@ -34,12 +34,11 @@ public class BoatController {
         return boatService.getBoat(boatId);
     }
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<Boat> addBoat(@RequestBody Boat boat) {
         try {
             log.info("Otrzymano żądanie dodania łodzi: {}", boat);
             boatService.addBoat(boat);
-            log.info("Łódź została dodana pomyślnie");
             return ResponseEntity.ok(boat);
         } catch (Exception e) {
             log.error("Błąd podczas dodawania łodzi: ", e);
@@ -48,19 +47,17 @@ public class BoatController {
     }
 
     @PutMapping("/{boatId}")
-    //@PostMapping("/updateBoat")
     public void updateBoat(@PathVariable Long boatId, @RequestBody Boat boat) {
         boatService.updateBoat(boatId, boat);
     }
 
     @DeleteMapping("/{boatId}")
     public ResponseEntity<Void> deleteBoat(@PathVariable Long boatId) {
-        try{
+        try {
             boatService.deleteBoat(boatId);
             return ResponseEntity.ok().build();
-        } catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
-
     }
 }

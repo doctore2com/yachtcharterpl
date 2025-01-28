@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CharterService } from '../services/charter.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Charter } from '../models/charter.model';
 
 @Component({
   selector: 'app-charter-form',
@@ -70,60 +71,64 @@ export class CharterFormComponent implements OnInit {
 
   onSubmit() {
     if (this.charterForm.valid) {
-      const startDate = new Date(this.charterForm.value.startCharter);
-      const endDate = new Date(this.charterForm.value.endCharter);
+      const startDate = this.charterForm.get('startCharter')?.value;
+      const endDate = this.charterForm.get('endCharter')?.value;
 
-      // Ustawiamy godzinę na 12:00:00 dla obu dat
-      startDate.setHours(12, 0, 0, 0);
-      endDate.setHours(12, 0, 0, 0);
+      console.log('Daty przed formatowaniem:', { startDate, endDate });
 
-      const charterData = {
-        name: this.charterForm.value.name,
-        description: this.charterForm.value.description,
-        startCharter: this.formatDate(startDate),
-        endCharter: this.formatDate(endDate),
-        port: this.charterForm.value.port,
-        user: {
-          id: this.charterForm.value.userId
-        },
+      const charter: Charter = {
         boat: {
           id: this.boatId
-        }
+        },
+        user: {
+          id: 1
+        },
+        name: this.charterForm.get('name')?.value,
+        description: this.charterForm.get('description')?.value || '',
+        startCharter: this.formatDateToString(startDate),
+        endCharter: this.formatDateToString(endDate),
+        port: this.charterForm.get('port')?.value
       };
 
-      console.log('Sending charter data:', charterData);
+      console.log('Obiekt Charter do wysłania:', charter);
 
-      this.charterService.createCharter(charterData).subscribe({
-        next: () => {
-          this.snackBar.open('Rezerwacja została pomyślnie utworzona!', 'OK', {
-            duration: 3000,
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
+      this.charterService.createCharter(charter).subscribe({
+        next: (response) => {
+          console.log('Sukces:', response);
+          this.snackBar.open('Rezerwacja została utworzona!', 'OK', {
+            duration: 3000
           });
           this.router.navigate(['/charters']);
         },
         error: (error) => {
-          console.error('Pełny błąd:', error);
-          this.snackBar.open(
-            `Wystąpił błąd podczas tworzenia rezerwacji: ${error.error?.message || error.message || 'Nieznany błąd'}`,
-            'OK',
-            {
-              duration: 5000,
-              horizontalPosition: 'center',
-              verticalPosition: 'top',
-            }
-          );
+          console.error('Błąd:', error);
+          let errorMessage = 'Wystąpił błąd podczas tworzenia rezerwacji';
+          if (error.error?.message) {
+            errorMessage += ': ' + error.error.message;
+          }
+          this.snackBar.open(errorMessage, 'OK', { duration: 5000 });
         }
       });
     } else {
       this.snackBar.open('Formularz zawiera błędy. Sprawdź wszystkie pola.', 'OK', {
-        duration: 3000,
-        horizontalPosition: 'center',
-        verticalPosition: 'top',
+        duration: 3000
       });
     }
   }
 
+  private formatDateToString(date: Date): string {
+    if (!date) return '';
+    // Konwertujemy string na obiekt Date jeśli to konieczne
+    const d = typeof date === 'string' ? new Date(date) : date;
+
+    // Formatujemy datę do wymaganego formatu
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+
+    // Zwracamy datę w formacie YYYY-MM-DD HH:mm:ss
+    return `${year}-${month}-${day} 12:00:00`;
+  }
 
   compareDates(start: Date, end: Date): boolean {
     return start && end && start < end;

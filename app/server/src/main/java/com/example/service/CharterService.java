@@ -43,17 +43,18 @@ public class CharterService {
         return charterRepository.findById(id).get();
     }
 
-    public void addCharter(Charter charter) {
-
+    public Charter addCharter(Charter charter) {
         try {
             log.info("Attempting to save charter: {}", charter);
             if (charter.getStartCharter() != null &&
                     charter.getEndCharter() != null &&
-                    charter.getStartCharter().compareTo(charter.getEndCharter())>0) {
+                    charter.getStartCharter().compareTo(charter.getEndCharter()) > 0) {
                 throw new IllegalArgumentException("Start date must be before end date");
             }
-            charterRepository.save(charter);
-            log.info("Charter saved successfully with id: {}", charter.getId());
+
+            Charter savedCharter = charterRepository.save(charter);
+            log.info("Charter saved successfully with id: {}", savedCharter.getId());
+            return savedCharter;
         } catch (Exception e) {
             log.error("Error saving charter: ", e);
             throw e;
