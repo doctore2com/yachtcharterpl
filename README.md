@@ -17,6 +17,7 @@ npm install
 DOCKER:
  
 docker-compose down
+docker compose down --remove-orphans -v    !!!!!
 docker-compose up --build
 docker-compose up db
 docker stop $(docker ps -a -q)

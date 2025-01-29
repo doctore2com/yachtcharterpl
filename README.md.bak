@@ -17,6 +17,7 @@ npm install
 DOCKER:
  
 docker-compose down
+ docker compose down --remove-orphans -v    !!!!!
 docker-compose up --build
 docker-compose up db
 docker stop $(docker ps -a -q)
@@ -199,5 +200,5 @@ MySQL Bench pobrać
 3. Pobierz Docker desktop i Docker compose (dodać do instrukcji przy pobieraniu).
 
 
-Pliki inicjalizujące do bazy danych (Copy/Paste)
-Mockup użytkownika (makiety użytkownika)
+Pliki inicjalizujące do bazy danych (Copy/Paste)  - gdzieś to dodać do książki
+Mockup użytkownika (makiety użytkownika) - to także dodać do ksiązki

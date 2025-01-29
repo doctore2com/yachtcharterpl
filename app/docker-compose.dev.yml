@@ -25,7 +25,7 @@ services:
     container_name: yacht-charter-server-dev
     ports:
       - "8080:8080"
-      - "5005:5005"  # dla debugowania
+      - "5006:5005"
     volumes:
       - ./server:/app
       - ~/.m2:/root/.m2
