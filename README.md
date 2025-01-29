@@ -24,8 +24,10 @@ docker stop $(docker ps -a -q)
 docker-compose
 docker volume ls
 docker volume rm yacht-charter-mysql-data
+docker volume prune
 
-docker-compose -f docker-compose.dev.yml up --build  !!!!!
+docker compose -f docker-compose.yml down --remove-orphans -v  !!!!!
+docker-compose -f docker-compose.yml up --build  !!!!!
 
 BASH:
 

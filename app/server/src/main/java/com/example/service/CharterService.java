@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+
 
 import java.util.Date;
 import java.util.List;
@@ -46,6 +48,9 @@ public class CharterService {
     public Charter addCharter(Charter charter) {
         try {
             log.info("Attempting to save charter: {}", charter);
+            log.info("Charter details - User: {}, Boat: {}, Start: {}, End: {}",
+                    charter.getUser(), charter.getBoat(),
+                    charter.getStartCharter(), charter.getEndCharter());
             if (charter.getStartCharter() != null &&
                     charter.getEndCharter() != null &&
                     charter.getStartCharter().compareTo(charter.getEndCharter()) > 0) {
@@ -64,7 +69,7 @@ public class CharterService {
     public void updateCharter(Long id, Charter charterDetails) {
 
         Charter charter = charterRepository.findById(id).orElseThrow(()->new RuntimeException("Charter not found"));
-        charter.setName(charterDetails.getName());
+        charter.setCharterName(charterDetails.getCharterName());
         charter.setDescription(charterDetails.getDescription());
         charter.setPort(charterDetails.getPort());
         charter.setStartCharter(charterDetails.getStartCharter());

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 
 @RestController
 @RequestMapping("/charters")
@@ -38,28 +39,23 @@ public class CharterController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addCharter(@RequestBody Charter charter) {
+    public ResponseEntity<?> createCharter(@RequestBody Charter charter) {
         try {
-            log.info("Otrzymano żądanie utworzenia rezerwacji. Dane: {}", charter);
+            log.info("Rozpoczęcie tworzenia rezerwacji");
+            log.debug("Otrzymane dane: {}", charter);
 
-            // Sprawdzamy czy użytkownik istnieje
-            User user = userRepository.findById(charter.getUser().getId())
-                    .orElseThrow(() -> new RuntimeException("Nie znaleziono użytkownika o ID: " + charter.getUser().getId()));
-
-            // Sprawdzamy czy łódź istnieje
-            Boat boat = boatRepository.findById(charter.getBoat().getId())
-                    .orElseThrow(() -> new RuntimeException("Nie znaleziono łodzi o ID: " + charter.getBoat().getId()));
-
-            // Ustawiamy znalezione encje
-            charter.setUser(user);
-            charter.setBoat(boat);
+            if (charter.getUser() == null || charter.getBoat() == null) {
+                log.warn("Brak wymaganych danych: user lub boat");
+                return ResponseEntity.badRequest().body("Wymagane pola: user i boat");
+            }
 
             Charter savedCharter = charterService.addCharter(charter);
+            log.info("Pomyślnie utworzono rezerwację o ID: {}", savedCharter.getId());
             return ResponseEntity.ok(savedCharter);
         } catch (Exception e) {
-            log.error("Błąd podczas tworzenia rezerwacji: ", e);
-            return ResponseEntity.badRequest()
-                    .body(new MessageResponse(e.getMessage()));
+            log.error("Błąd podczas tworzenia rezerwacji", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Błąd podczas tworzenia rezerwacji: " + e.getMessage());
         }
     }
 

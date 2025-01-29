@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.Set;
 import java.util.HashSet;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Getter
@@ -39,5 +40,6 @@ public class Boat {
     private int distance;
 
     @OneToMany(mappedBy = "boat", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("boat")
     private Set<Charter> charters = new HashSet<>();
 }
