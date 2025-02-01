@@ -1,44 +1,46 @@
 package com.example.service;
 
-import  com.example.boat.Boat;
+import com.example.boat.Boat;
 import com.example.repository.BoatRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.Map;
-
-
 import java.util.List;
+import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
-public class  BoatService {
+public class BoatService {
 
-    private final BoatRepository boatRepository;
+    private final Logger logger = LoggerFactory.getLogger(BoatService.class);
 
+    @Autowired
+    private BoatRepository boatRepository;
 
-    public List<Boat> getAllBoats(){
+    public List<Boat> getAllBoats() {
         return boatRepository.findAll();
     }
 
     public Boat getBoat(Long id) {
-        return boatRepository.findById(id).get();
+        Optional<Boat> boat = boatRepository.findById(id);
+        return boat.orElse(null);
     }
 
-
-    public Boat addBoat(MultipartFile file, Map<String, String> boatData){
+    public Boat addBoat(MultipartFile file, Map<String, String> boatData) {
         try {
             Boat boat = createBoatFromData(boatData);
-
             return boatRepository.save(boat);
         } catch (Exception e) {
-            throw new RuntimeException("Blad podczas dodawania lodzi",e);
+            throw new RuntimeException("Blad podczas dodawania lodzi", e);
         }
     }
 
-    public Boat createBoatFromData(Map<String, String> boatData){
+    public Boat createBoatFromData(Map<String, String> boatData) {
         Boat boat = new Boat();
-        boat.setName(boatData.get("name"));
+        boat.setBoatName(boatData.get("name"));
         boat.setBunk(Integer.parseInt(boatData.get("bunk")));
         boat.setCabins(Integer.parseInt(boatData.get("cabins")));
         boat.setDescription(boatData.get("description"));
@@ -55,36 +57,41 @@ public class  BoatService {
         return boat;
     }
 
-
-
-
     public void addBoat(Boat boat) {
+        if (boat.getBoatName() == null || boat.getBoatName().trim().isEmpty()) {
+            throw new IllegalArgumentException("Nazwa łodzi jest wymagana");
+        }
         boatRepository.save(boat);
     }
 
-    public void updateBoat(Long id, Boat boatDetails) {
-        Boat boat = boatRepository.findById(id).orElseThrow(()->new RuntimeException("Boat not found"));
-        boat.setName(boatDetails.getName());
+    public Boat updateBoat(Long id, Boat boatDetails) {
+        Boat boat = boatRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Nie znaleziono łodzi o id: " + id));
+
+        boat.setBoatName(boatDetails.getBoatName());
         boat.setDescription(boatDetails.getDescription());
-        boat.setBunk(boatDetails.getBunk());
-        boat.setCharters(boatDetails.getCharters());
-        boat.setCabins(boatDetails.getCabins());
-        boat.setDistance(boatDetails.getDistance());
-        boat.setImageSource(boatDetails.getImageSource());
+        boat.setOpinions(boatDetails.getOpinions());
         boat.setLandlord(boatDetails.getLandlord());
         boat.setManufacturer(boatDetails.getManufacturer());
-        boat.setOpinions(boatDetails.getOpinions());
+        boat.setImageSource(boatDetails.getImageSource());
         boat.setPlacesInside(boatDetails.getPlacesInside());
-        boat.setPower(boatDetails.getPower());
+        boat.setCabins(boatDetails.getCabins());
+        boat.setBunk(boatDetails.getBunk());
         boat.setPriceInTheSeason(boatDetails.getPriceInTheSeason());
         boat.setPriceOutOfSeason(boatDetails.getPriceOutOfSeason());
         boat.setYear(boatDetails.getYear());
-        boat.setCharters(boatDetails.getCharters());
-        boatRepository.save(boat);
+        boat.setPower(boatDetails.getPower());
+        boat.setDistance(boatDetails.getDistance());
+        return boatRepository.save(boat);
     }
 
     public void deleteBoat(Long id) {
-        boatRepository.findById(id)
-                .ifPresent(boatRepository::delete);
-   }
+        boatRepository.deleteById(id);
+    }
+
+    public void validateBoat(Boat boat) {
+        if (boat.getBoatName() == null || boat.getBoatName().isEmpty()) {
+            throw new IllegalArgumentException("Nazwa łodzi jest wymagana");
+        }
+    }
 }

@@ -1,6 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,6 +12,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +29,8 @@ import { MatInputModule } from '@angular/material/input';
 import { CharterService } from './services/charter.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CharterListComponent } from './charter-list/charter-list.component';
+import { LoginComponent } from './login/login.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 
 @NgModule({
@@ -40,7 +43,8 @@ import { CharterListComponent } from './charter-list/charter-list.component';
     UserListComponent,
     LoginListComponent,
     BoatAddComponent,
-    CharterListComponent
+    CharterListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -61,9 +65,18 @@ import { CharterListComponent } from './charter-list/charter-list.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSnackBarModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule
   ],
-  providers: [BoatService, CharterService],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    BoatService,
+    CharterService
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BoatService } from '../shared/boat/boat.service';
-import { Boat } from '../shared/boat/boat.model';
+import { BoatService } from '../services/boat.service';
+import { Boat } from '../models/boat.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -10,9 +10,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 
 export class BoatListComponent implements OnInit {
-  boats: Boat[]=[];
-  error= '';
-
+  boats: Boat[] = [];
+  error: string = '';
 
   constructor(
     private boatService: BoatService,
@@ -20,27 +19,22 @@ export class BoatListComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     console.log('Inicjalizacja BoatListComponent');
     this.loadBoats();
   }
 
-  loadBoats(){
-    this.boatService.getAll().subscribe({
-      next:(data)=>{
-        console.log('Otrzymane dane:', data);
-        this.boats = data;
+  loadBoats(): void {
+    this.boatService.getBoats().subscribe({
+      next: (boats) => {
+        console.log('Otrzymane łodzie:', boats);
+        this.boats = boats;
+      },
+      error: (error) => {
+        console.error('Błąd podczas pobierania łodzi:', error);
       }
-      ,
-      error:(err)=>{
-        this.error = 'Błąd ładowania';
-      }
-    })
+    });
   }
-  //   this.boatService.getAll().subscribe(data => {
-  // console.log('lodki',data)
-  //     console.log('lodka',data[0].imageSource)
-  // this.boats = data;
 
   deleteBoat(id: number) {
     if (confirm('Czy na pewno chcesz usunąć ten jacht?')) {

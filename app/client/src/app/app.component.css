@@ -1,0 +1,39 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+nav {
+  margin-left: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.username {
+  margin: 0 16px;
+  display: flex;
+  align-items: center;
+}
+
+.username mat-icon {
+  margin-right: 8px;
+}
+
+.active {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
+
+mat-icon {
+  margin-right: 4px;
+}
+
+a mat-icon, button mat-icon {
+  vertical-align: middle;
+}

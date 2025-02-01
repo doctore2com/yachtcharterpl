@@ -31,16 +31,19 @@
 
 mat-card-actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-around;
   padding: 8px;
-  gap: 8px;
 }
 
 button {
   margin-left: 8px;
 }
 
-.boats-grid {
+.boat-list-container {
+  padding: 20px;
+}
+
+.boat-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
@@ -48,10 +51,24 @@ button {
 }
 
 .boat-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  transition: transform 0.2s;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.boat-card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  padding: 20px;
+  font-size: 1.2em;
+}
+
+mat-icon {
+  margin-right: 4px;
 }
 
 .boat-card:hover {
@@ -83,9 +100,92 @@ img {
   object-fit: cover;
 }
 
-.error-message {
-  color: red;
-  text-align: center;
-  padding: 20px;
+.boats-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
+.page-title {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #3f51b5;
+}
+
+.boats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.boat-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+}
+
+.boat-image {
+  height: 200px;
+  object-fit: cover;
+}
+
+.boat-details {
+  margin: 1rem 0;
+}
+
+.detail-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+
+  mat-icon {
+    margin-right: 0.5rem;
+    color: #3f51b5;
+  }
+}
+
+.price-info {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+
+.price {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem 0;
+
+  .label {
+    color: #666;
+  }
+
+  .amount {
+    font-weight: bold;
+    color: #3f51b5;
+  }
+}
+
+.description {
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  line-height: 1.4;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}

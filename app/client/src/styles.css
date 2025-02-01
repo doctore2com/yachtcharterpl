@@ -1,12 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons';
-
-
-
 
 html, body { height: 100%; }
 body {
  margin: 0;
- font-family: Roboto, sans-serif;
+ font-family: Roboto, "Helvetica Neue", sans-serif;
+ background-color: #f5f5f5;
+}
+
+.success-snackbar {
+  background: #4caf50;
+  color: white;
+}
+
+.error-snackbar {
+  background: #f44336;
+  color: white;
+}
+
+.mat-snack-bar-container {
+  margin: 16px !important;
+}
+
+.mat-simple-snackbar-action {
+  color: white;
 }

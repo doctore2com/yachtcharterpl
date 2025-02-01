@@ -6,13 +6,14 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.http.SessionCreationPolicy;
 
 import java.util.Arrays;
 
@@ -27,7 +28,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return NoOpPasswordEncoder.getInstance();  // Nie hashuj haseł (tylko do developmentu!)
     }
 
     @Bean
@@ -36,20 +37,22 @@ public class SecurityConfig {
                 .cors().configurationSource(corsConfigurationSource())
                 .and()
                 .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
                 .authorizeRequests()
-                // Boats endpoints
-                .antMatchers(HttpMethod.GET, "/boats").permitAll()
-                .antMatchers(HttpMethod.GET, "/boats/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/boats/**").permitAll()
-                .antMatchers(HttpMethod.PUT, "/boats/**").permitAll()
-                .antMatchers(HttpMethod.DELETE, "/boats/**").permitAll()
-                // Charters endpoints
-                .antMatchers(HttpMethod.GET, "/charters/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/charters/**").permitAll()
-                .antMatchers(HttpMethod.PUT, "/charters/**").permitAll()
-                .antMatchers(HttpMethod.DELETE, "/charters/**").permitAll()
+                // Boats endpoints - dostępne dla wszystkich
+                .antMatchers(HttpMethod.GET, "/api/boats/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/boats").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/boats/**").authenticated()
+                .antMatchers(HttpMethod.PUT, "/api/boats/**").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/api/boats/**").authenticated()
+                // Auth endpoints
                 .antMatchers("/api/auth/**").permitAll()
-                .anyRequest().authenticated();
+                // Charters endpoints
+                .antMatchers("/api/charters/**").authenticated()
+                .anyRequest().authenticated()
+                .and()
+                .httpBasic();
 
         return http.build();
     }

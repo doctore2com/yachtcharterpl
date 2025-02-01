@@ -10,38 +10,31 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class CharterListComponent implements OnInit {
   charters: Charter[] = [];
-  loading = true;
-  error = false;
+  error: string = '';
+  noCharters: boolean = false;
+  loading: boolean = false;
 
   constructor(
     private charterService: CharterService,
     private snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadCharters();
   }
 
-  loadCharters() {
+  loadCharters(): void {
     this.loading = true;
-    this.error = false;
-
     this.charterService.getAllCharters().subscribe({
       next: (data) => {
-        console.log('Otrzymane dane:', data);
-        this.charters = Array.isArray(data) ? data : [];
+        this.charters = data;
+        this.noCharters = data.length === 0;
         this.loading = false;
       },
-      error: (error) => {
-        console.error('Błąd podczas ładowania rezerwacji:', error);
-        this.error = true;
+      error: (err) => {
+        console.error('Błąd podczas pobierania rezerwacji:', err);
+        this.error = 'Nie udało się załadować listy rezerwacji';
         this.loading = false;
-        this.charters = [];
-        this.snackBar.open('Błąd podczas ładowania rezerwacji', 'OK', {
-          duration: 3000,
-          horizontalPosition: 'center',
-          verticalPosition: 'top'
-        });
       }
     });
   }

@@ -5,10 +5,6 @@
 
 
 <div class= "title">
-  <br>
-  <h1>Lista jachtów do czarteru</h1>
-  <br>
-
 </div>
 <div class="container">
   <div class="row">
@@ -18,30 +14,62 @@
       </div>
     </div>
     <div *ngIf="!error" class="row">
-      <div class="boats-grid">
-        <mat-card *ngFor="let boat of boats">
-          <mat-card-header>
-            <mat-card-title>{{ boat.name }}</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <img mat-card-image [src]="boat.imageSource
-|| '/assets/sasanka.jpg'" [alt]="boat.name">
-            <p>{{boat.description}}</p>
-            <p><strong>Miejsca:</strong> {{boat.placesInside}}</p>
-            <p><strong>Cena:</strong> {{boat.priceInTheSeason}} zł</p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-button [routerLink]="['/boat-details', boat.id]">
-              Szczegóły
-            </button>
-            <button mat-button [routerLink]="['/boat-edit', boat.id]">
-              Edytuj
-            </button>
-            <button mat-button color="warn" (click)="deleteBoat(boat.id)">
-              Usuń
-            </button>
-          </mat-card-actions>
-        </mat-card>
+      <div class="boats-container">
+        <h2 class="page-title">Lista jachtów do czarteru</h2>
+
+        <div class="boats-grid">
+          <mat-card class="boat-card" *ngFor="let boat of boats">
+            <img mat-card-image [src]="boat.imageSource" [alt]="boat.boatName" class="boat-image">
+
+            <mat-card-header>
+              <mat-card-title>{{ boat.boatName }}</mat-card-title>
+              <mat-card-subtitle>{{ boat.manufacturer }}</mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+              <div class="boat-details">
+                <div class="detail-group">
+                  <div class="detail-item">
+                    <mat-icon>group</mat-icon>
+                    <span>Miejsca: {{ boat.placesInside }}</span>
+                  </div>
+
+                  <div class="detail-item">
+                    <mat-icon>hotel</mat-icon>
+                    <span>Koje: {{ boat.bunk }}</span>
+                  </div>
+
+                  <div class="detail-item">
+                    <mat-icon>meeting_room</mat-icon>
+                    <span>Kabiny: {{ boat.cabins }}</span>
+                  </div>
+                </div>
+
+                <div class="price-info">
+                  <div class="price">
+                    <span class="label">Sezon:</span>
+                    <span class="amount">{{ boat.priceInTheSeason }} zł/doba</span>
+                  </div>
+                  <div class="price">
+                    <span class="label">Poza sezonem:</span>
+                    <span class="amount">{{ boat.priceOutOfSeason }} zł/doba</span>
+                  </div>
+                </div>
+              </div>
+
+              <p class="description">{{ boat.description }}</p>
+            </mat-card-content>
+
+            <mat-card-actions>
+              <button mat-raised-button color="primary" [routerLink]="['/charter-form', boat.id]">
+                Zarezerwuj
+              </button>
+              <button mat-button color="accent" [routerLink]="['/boats', boat.id]">
+                Szczegóły
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
       </div>
     </div>
   </div>
@@ -50,4 +78,3 @@
 <button mat-fab color="primary" class="add-button" routerLink="/boat-add">
   <mat-icon>add</mat-icon>
 </button>
-

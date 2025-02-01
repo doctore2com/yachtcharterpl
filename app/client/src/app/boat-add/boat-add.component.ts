@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Boat } from "../shared/boat/boat.model";
+import { Boat } from "../models/boat.model";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { BoatService } from "../shared/boat/boat.service";
 import { Router } from "@angular/router";
@@ -16,7 +16,7 @@ export class BoatAddComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private boatService: BoatService, private router: Router) {
     this.boatForm = this.fb.group({
-      name: ['', Validators.required],
+      boatName: ['', Validators.required],
       description: ['', Validators.required],
       manufacturer: [''],
       landlord: [''],
@@ -42,6 +42,7 @@ export class BoatAddComponent implements OnInit {
         ...this.boatForm.value,
         id: 0
       };
+      console.log('Dane łodzi do wysłania:', boatData);
 
       this.boatService.save(boatData).subscribe({
         next: () => {

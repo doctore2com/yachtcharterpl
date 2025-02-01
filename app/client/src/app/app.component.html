@@ -1,20 +1,46 @@
 <mat-toolbar color="primary">
-  <span>Yacht Charter</span>
+  <span>{{ title }}</span>
+
   <nav>
-    <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+    <a mat-button routerLink="/boats" routerLinkActive="active">
+      <mat-icon>directions_boat</mat-icon>
       Lista jachtów
     </a>
     <a mat-button routerLink="/boat-add" routerLinkActive="active">
+      <mat-icon>add_circle</mat-icon>
       Dodaj jacht
     </a>
     <a mat-button routerLink="/charters" routerLinkActive="active">
+      <mat-icon>event</mat-icon>
       Lista rezerwacji
     </a>
   </nav>
+  <!-- <a mat-button routerLink="/boat-add" routerLinkActive="active" *ngIf="isLoggedIn()">
+    <mat-icon>add_circle</mat-icon>
+    Dodaj jacht
+  </a> -->
+
+  <span class="spacer"></span>
+
+  <!-- Menu dla niezalogowanych -->
+  <ng-container *ngIf="!isLoggedIn()">
+    <a mat-button routerLink="/login" routerLinkActive="active">
+      <mat-icon>login</mat-icon>
+      Logowanie
+    </a>
+  </ng-container>
+
+  <!-- Menu dla zalogowanych -->
+  <ng-container *ngIf="isLoggedIn()">
+    <span class="username">
+      <mat-icon>person</mat-icon>
+      {{ getUsername() }}
+    </span>
+    <button mat-button (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      Wyloguj
+    </button>
+  </ng-container>
 </mat-toolbar>
 
 <router-outlet></router-outlet>
-
-
-
-

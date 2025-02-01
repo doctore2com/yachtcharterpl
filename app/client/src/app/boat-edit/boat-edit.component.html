@@ -1,43 +1,78 @@
-<div class="container">
+<div class="edit-container">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>Edycja łodzi</mat-card-title>
+      <mat-card-title>Edycja łodzi: {{ boat.boatName }}</mat-card-title>
     </mat-card-header>
 
     <mat-card-content>
-      <form [formGroup]="boatForm" (ngSubmit)="onSubmit()">
-        <mat-form-field appearance="outline" class="full-width">
+      <form #boatForm="ngForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
           <mat-label>Nazwa łodzi</mat-label>
-          <input matInput formControlName="name" required>
+          <input matInput [(ngModel)]="boat.boatName" name="boatName" required>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="full-width">
+        <mat-form-field appearance="fill">
           <mat-label>Opis</mat-label>
-          <textarea matInput formControlName="description" rows="3"></textarea>
+          <textarea matInput [(ngModel)]="boat.description" name="description"></textarea>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="full-width">
+        <mat-form-field appearance="fill">
+          <mat-label>Właściciel</mat-label>
+          <input matInput [(ngModel)]="boat.landlord" name="landlord" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
           <mat-label>Producent</mat-label>
-          <input matInput formControlName="manufacturer" required>
+          <input matInput [(ngModel)]="boat.manufacturer" name="manufacturer" required>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
+          <mat-label>URL obrazu</mat-label>
+          <input matInput [(ngModel)]="boat.imageSource" name="imageSource">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
           <mat-label>Liczba miejsc</mat-label>
-          <input matInput type="number" formControlName="placesInside" required>
+          <input matInput type="number" [(ngModel)]="boat.placesInside" name="placesInside" required>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
+          <mat-label>Liczba kabin</mat-label>
+          <input matInput type="number" [(ngModel)]="boat.cabins" name="cabins" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Koje</mat-label>
+          <input matInput type="number" [(ngModel)]="boat.bunk" name="bunk" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
           <mat-label>Cena w sezonie</mat-label>
-          <input matInput type="number" formControlName="priceInTheSeason" required>
+          <input matInput type="number" [(ngModel)]="boat.priceInTheSeason" name="priceInTheSeason" required>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Cena poza sezonem</mat-label>
-          <input matInput type="number" formControlName="priceOutOfSeason">
+          <input matInput type="number" [(ngModel)]="boat.priceOutOfSeason" name="priceOutOfSeason" required>
         </mat-form-field>
 
-        <div class="button-row">
-          <button mat-button type="button" routerLink="/boats">Anuluj</button>
+        <mat-form-field appearance="fill">
+          <mat-label>Rok produkcji</mat-label>
+          <input matInput type="number" [(ngModel)]="boat.year" name="year" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Moc silnika</mat-label>
+          <input matInput type="number" [(ngModel)]="boat.power" name="power" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Zasięg</mat-label>
+          <input matInput type="number" [(ngModel)]="boat.distance" name="distance" required>
+        </mat-form-field>
+
+        <div class="button-container">
+          <button mat-button type="button" (click)="cancel()">Anuluj</button>
           <button mat-raised-button color="primary" type="submit" [disabled]="!boatForm.valid">
             Zapisz zmiany
           </button>

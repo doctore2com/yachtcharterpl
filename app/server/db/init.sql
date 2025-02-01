@@ -22,22 +22,22 @@ CREATE TABLE IF NOT EXISTS user_roles (
                                           FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
-CREATE TABLE IF NOT EXISTS boat (
-                                    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-                                    boat_name VARCHAR(255),
-                                    description TEXT,
-                                    opinions TEXT,
-                                    landlord VARCHAR(255),
-                                    manufacturer VARCHAR(255),
-                                    image_source VARCHAR(255),
-                                    places_inside INT,
-                                    cabins INT,
-                                    bunk INT,
-                                    price_in_the_season INT,
-                                    price_out_of_season INT,
-                                    year INT,
-                                    power INT,
-                                    distance INT
+CREATE TABLE IF NOT EXISTS boats (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    boat_name VARCHAR(255) NOT NULL,
+    description TEXT,
+    opinions TEXT,
+    landlord VARCHAR(255),
+    manufacturer VARCHAR(255),
+    image_source VARCHAR(255),
+    places_inside INT,
+    cabins INT,
+    bunk INT,
+    price_in_the_season DECIMAL(10,2),
+    price_out_of_season DECIMAL(10,2),
+    year INT,
+    power INT,
+    distance INT
 );
 
 CREATE TABLE IF NOT EXISTS charter (
@@ -49,31 +49,34 @@ CREATE TABLE IF NOT EXISTS charter (
                                        start_charter DATETIME,
                                        end_charter DATETIME,
                                        port VARCHAR(255),
-                                       FOREIGN KEY (boat_id) REFERENCES boat(id),
+                                       FOREIGN KEY (boat_id) REFERENCES boats(id),
                                        FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 -- Czyszczenie tabel
 SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE TABLE charter;
-TRUNCATE TABLE boat;
+TRUNCATE TABLE boats;
 TRUNCATE TABLE user_roles;
 TRUNCATE TABLE roles;
 TRUNCATE TABLE users;
 SET FOREIGN_KEY_CHECKS = 1;
 
--- Dodawanie danych
+-- Dodawanie ról
+INSERT INTO roles(id, name) VALUES(1, 'ROLE_USER');
+INSERT INTO roles(id, name) VALUES(2, 'ROLE_MODERATOR');
+INSERT INTO roles(id, name) VALUES(3, 'ROLE_ADMIN');
+
+-- Dodawanie użytkownika (zahashowane hasło BCrypt dla 'user1')
 INSERT INTO users (id, username, email, password) VALUES
-    (1, 'user1', 'user1@example.com', '$2a$10$YourHashedPasswordHere');
+(1, 'user1', 'user1@example.com', 'user1');
 
-INSERT INTO roles(name) VALUES('ROLE_USER');
-INSERT INTO roles(name) VALUES('ROLE_ADMIN');
-
+-- Przypisanie roli użytkownikowi
 INSERT INTO user_roles(user_id, role_id) VALUES(1, 1);
 
 -- Przykładowe łodzie
-INSERT INTO boat (boat_name, description, opinions, landlord, manufacturer, image_source, places_inside, cabins, bunk, price_in_the_season, price_out_of_season, year, power, distance) VALUES
-                                                                                                                                                                                            ('Antila 24', 'Komfortowy jacht dla rodziny', 'Świetna łódź, polecam!', 'Jan Kowalski', 'Antila Yachts', '/assets/sasanka.jpg', 6, 2, 6, 350, 250, 2020, 10, 500),
-                                                                                                                                                                                            ('Tango 780 Sport', 'Sportowy jacht weekendowy', 'Idealna na krótkie rejsy', 'Anna Nowak', 'Tango Yachts', '/assets/sasanka.jpg', 4, 1, 4, 300, 200, 2019, 15, 400),
-                                                                                                                                                                                            ('Phobos 25', 'Przestronny jacht turystyczny', 'Bardzo stabilna jednostka', 'Piotr Wiśniewski', 'Phobos Yachts', '/assets/sasanka.jpg', 7, 2, 7, 400, 300, 2021, 8, 600),
-                                                                                                                                                                                            ('Maxus 26', 'Luksusowy jacht rodzinny', 'Komfortowe wnętrze', 'Marek Zieliński', 'Maxus Yachts', '/assets/sasanka.jpg', 8, 3, 8, 450, 350, 2022, 12, 700);
+INSERT INTO boats (boat_name, description, opinions, landlord, manufacturer, image_source, places_inside, cabins, bunk, price_in_the_season, price_out_of_season, year, power, distance) VALUES
+('Antila 24', 'Komfortowy jacht dla rodziny', 'Świetna łódź, polecam!', 'Jan Kowalski', 'Antila Yachts', '/assets/sasanka.jpg', 6, 2, 6, 350, 250, 2020, 10, 500),
+('Tango 780 Sport', 'Sportowy jacht weekendowy', 'Idealna na krótkie rejsy', 'Anna Nowak', 'Tango Yachts', '/assets/sasanka.jpg', 4, 1, 4, 300, 200, 2019, 15, 400),
+('Phobos 25', 'Przestronny jacht turystyczny', 'Bardzo stabilna jednostka', 'Piotr Wiśniewski', 'Phobos Yachts', '/assets/sasanka.jpg', 7, 2, 7, 400, 300, 2021, 8, 600),
+('Maxus 26', 'Luksusowy jacht rodzinny', 'Komfortowe wnętrze', 'Marek Zieliński', 'Maxus Yachts', '/assets/sasanka.jpg', 8, 3, 8, 450, 350, 2022, 12, 700);

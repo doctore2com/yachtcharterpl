@@ -1,27 +1,20 @@
-FROM node:16.13.0 AS builder
+FROM node:16.13.0
 
 WORKDIR /app
 
-# Najpierw kopiujemy tylko package.json
-COPY package.json ./
+# Najpierw skopiuj pliki package*.json
+COPY package*.json ./
 
-# Instalujemy dokładne wersje zależności
-RUN npm install -g @angular/cli@13.1.1 && \
-    npm install @angular-devkit/build-angular@13.1.1 && \
-    npm install typescript@4.5.2 && \
-    npm install
+# Zainstaluj zależności
+RUN npm install --legacy-peer-deps
 
-# Kopiujemy resztę projektu
+# Skopiuj resztę plików projektu
 COPY . .
 
-# Upewniamy się, że mamy poprawne wersje
-RUN npm list @angular/core && \
-    npm list @angular/cli
+# Ustaw uprawnienia dla całego katalogu aplikacji
+RUN chmod -R 777 /app
 
-# Build
-RUN ./node_modules/.bin/ng build --configuration=production
+EXPOSE 4200
 
-FROM nginx:alpine
-COPY --from=builder /app/dist/client /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Uruchom aplikację z hot reloadingiem
+CMD ["npm", "start"]

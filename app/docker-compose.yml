@@ -1,37 +1,44 @@
+version: '3.8'
 services:
   client:
     build:
       context: ./client
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     working_dir: /app
     ports:
       - "4200:4200"
     volumes:
       - ./client:/app
       - /app/node_modules
-    command: npm start -- --poll=2000 --host 0.0.0.0
+    command: npm start -- --poll=2000 --host 0.0.0.0 --proxy-config proxy.conf.json
     environment:
       - WATCHPACK_POLLING=true
       - CHOKIDAR_USEPOLLING=true
+      - API_URL=http://yacht-charter-server-dev:8080
     depends_on:
-      - server
+      - yacht-charter-server-dev
     networks:
-      - yacht-net
+      - yacht-charter-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
-  server:
+  yacht-charter-server-dev:
     build:
       context: ./server
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     container_name: yacht-charter-server-dev
     ports:
       - "8080:8080"
-      - "5006:5005"
+      - "5005:5005"
     volumes:
       - ./server:/app
       - ~/.m2:/root/.m2
     environment:
       - SPRING_PROFILES_ACTIVE=dev
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/yacht_charter?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/yacht_charter?useSSL=false&allowPublicKeyRetrieval=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
@@ -40,37 +47,47 @@ services:
       - SPRING_DEVTOOLS_LIVERELOAD_ENABLED=true
       - SPRING_JPA_DEFER_DATASOURCE_INITIALIZATION=true
       - SPRING_SQL_INIT_MODE=always
+      - CORS_ALLOWED_ORIGINS=http://localhost:4200
     networks:
-      - yacht-net
+      - yacht-charter-network
     depends_on:
       mysql:
         condition: service_healthy
     restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   mysql:
     image: mysql:8.0
     container_name: yacht-charter-mysql
     ports:
-      - "3307:3306"
+      - "3306:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=yacht_charter
-      - MYSQL_USER=springuser
-      - MYSQL_PASSWORD=root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: yacht_charter
     volumes:
       - mysql_data:/var/lib/mysql
       - ./server/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
     networks:
-      - yacht-net
+      - yacht-charter-network
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
       interval: 5s
       timeout: 5s
       retries: 20
-    command: --init-file /docker-entrypoint-initdb.d/init.sql
+    command: --innodb-log-file-size=256M --innodb-log-buffer-size=64M --innodb-buffer-pool-size=512M --max-allowed-packet=128M --log-error-verbosity=1
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 networks:
-  yacht-net:
+  yacht-charter-network:
     driver: bridge
 
 volumes:

@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 
 @RestController
-@RequestMapping("/charters")
+@RequestMapping("/api/charters")
 @CrossOrigin(origins = "http://localhost:4200")
 @Slf4j
 public class CharterController {
@@ -41,36 +41,48 @@ public class CharterController {
     @PostMapping
     public ResponseEntity<?> createCharter(@RequestBody Charter charter) {
         try {
-            log.info("Rozpoczęcie tworzenia rezerwacji");
-            log.debug("Otrzymane dane: {}", charter);
+            log.info("Otrzymano żądanie utworzenia rezerwacji");
+            log.debug("Dane rezerwacji: {}", charter);
 
-            if (charter.getUser() == null || charter.getBoat() == null) {
-                log.warn("Brak wymaganych danych: user lub boat");
-                return ResponseEntity.badRequest().body("Wymagane pola: user i boat");
+            if (charter.getUser() == null || charter.getUser().getId() == null) {
+                log.error("Brak danych użytkownika");
+                return ResponseEntity.badRequest()
+                    .body("Musisz być zalogowany, aby utworzyć rezerwację");
+            }
+
+            if (charter.getBoat() == null || charter.getBoat().getId() == null) {
+                log.error("Brak danych łodzi");
+                return ResponseEntity.badRequest()
+                    .body("Wymagane dane łodzi");
             }
 
             Charter savedCharter = charterService.addCharter(charter);
             log.info("Pomyślnie utworzono rezerwację o ID: {}", savedCharter.getId());
             return ResponseEntity.ok(savedCharter);
+
         } catch (Exception e) {
             log.error("Błąd podczas tworzenia rezerwacji", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Błąd podczas tworzenia rezerwacji: " + e.getMessage());
+            return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Błąd podczas tworzenia rezerwacji: " + e.getMessage());
         }
     }
 
-    @GetMapping("/{charterId}")
-    public Charter getCharter(@PathVariable Long charterId) {
-        return charterService.getCharter(charterId);
+    @GetMapping("/{id}")
+    public ResponseEntity<Charter> getCharter(@PathVariable Long id) {
+        Charter charter = charterService.getCharter(id);
+        return ResponseEntity.ok(charter);
     }
 
-    @PutMapping("/{charterId}")
-    public void updateCharter(@PathVariable Long charterId, @RequestBody Charter charter) {
-        charterService.updateCharter(charterId, charter);
+    @PutMapping("/{id}")
+    public ResponseEntity<Charter> updateCharter(@PathVariable Long id, @RequestBody Charter charter) {
+        Charter updatedCharter = charterService.updateCharter(id, charter);
+        return ResponseEntity.ok(updatedCharter);
     }
 
-    @DeleteMapping("/{charterId}")
-    public void deleteCharter(@PathVariable Long charterId) {
-        charterService.deleteCharter(charterId);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCharter(@PathVariable Long id) {
+        charterService.deleteCharter(id);
+        return ResponseEntity.ok().build();
     }
 }

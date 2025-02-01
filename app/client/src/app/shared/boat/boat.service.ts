@@ -1,24 +1,21 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError, tap, throwError } from 'rxjs';
-import { Boat } from "./boat.model";
+import { Boat } from "../../models/boat.model";
 
 @Injectable({providedIn:'root'})
 export class BoatService {
-
-  public API = 'http://localhost:8080';
-  public BOAT_API = `${this.API}/boats`;
+  private apiUrl = '/api/boats';  // zmiana na względną ścieżkę
 
   constructor(private http: HttpClient) {
   }
 
-
   getAll(): Observable<Boat[]> {
-    console.log('Wywołanie getAll, URL:', `${this.BOAT_API}/`);
-    return this.http.get<Boat[]>(`${this.BOAT_API}/`);
+    console.log('Wywołanie getAll, URL:', `${this.apiUrl}/`);
+    return this.http.get<Boat[]>(this.apiUrl);
   }
   get(id: string): Observable<Boat> {
-    return this.http.get<Boat>(this.BOAT_API + '/' + id);
+    return this.http.get<Boat>(`${this.apiUrl}/${id}`);
   }
 
   save(boat: Boat): Observable<Boat> {
@@ -28,7 +25,7 @@ export class BoatService {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
 
-    return this.http.post<Boat>(this.BOAT_API, boat, {
+    return this.http.post<Boat>(this.apiUrl, boat, {
       headers: headers
     }).pipe(
       tap(response => console.log('Odpowiedź:', response)),
@@ -52,11 +49,11 @@ export class BoatService {
   }
 
   remove(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.BOAT_API}/${this.BOAT_API}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
   deleteBoat(id: number): Observable<void>{
-      return this.http.delete<void>(`${this.BOAT_API}/${id}`).pipe(
+      return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
           tap(() => console.log(`Usunieto łódź o id: ${id}`)),
           catchError(error=> {
           console.error('Błąd podczas usuwania łodzi:', error);
@@ -66,7 +63,7 @@ export class BoatService {
   }
 
   updateBoat(id: number, boat: Boat): Observable<Boat> {
-    return this.http.put<Boat>(`${this.BOAT_API}/${id}`, boat).pipe(
+    return this.http.put<Boat>(`${this.apiUrl}/${id}`, boat).pipe(
       tap(response => console.log('Zaktualizowano łódź:', response)),
       catchError(error => {
         console.error('Błąd podczas aktualizacji łodzi:', error);

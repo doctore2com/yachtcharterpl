@@ -1,0 +1,62 @@
+<div class="login-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>lock</mat-icon>
+        Logowanie
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Nazwa użytkownika</mat-label>
+          <input matInput
+                 formControlName="username"
+                 required
+                 autocomplete="username">
+          <mat-icon matPrefix>person</mat-icon>
+          <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
+            Nazwa użytkownika jest wymagana
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Hasło</mat-label>
+          <input matInput
+                 [type]="hidePassword ? 'password' : 'text'"
+                 formControlName="password"
+                 required
+                 autocomplete="current-password">
+          <mat-icon matPrefix>lock</mat-icon>
+          <button mat-icon-button
+                  matSuffix
+                  (click)="hidePassword = !hidePassword"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hidePassword">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+            Hasło jest wymagane
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button
+                color="primary"
+                type="submit"
+                [disabled]="!loginForm.valid || isLoading">
+          <mat-icon *ngIf="!isLoading">login</mat-icon>
+          <mat-spinner diameter="20" *ngIf="isLoading"></mat-spinner>
+          {{ isLoading ? 'Logowanie...' : 'Zaloguj się' }}
+        </button>
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <a mat-button routerLink="/register">
+        <mat-icon>person_add</mat-icon>
+        Nie masz konta? Zarejestruj się
+      </a>
+    </mat-card-actions>
+  </mat-card>
+</div>

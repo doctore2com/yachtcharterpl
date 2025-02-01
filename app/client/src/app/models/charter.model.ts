@@ -1,14 +1,13 @@
+import { CharterUser } from './charter-user.model';
+import { Boat } from './boat.model';
+
 export interface Charter {
   id?: number;
-  boat: {
-    id: number;
-  }
-  user: {
-    id: number;
-  }
-  startCharter: string;
-  endCharter: string;
-  name: string;
+  charterName: string;
   description?: string;
-  port?: string;
+  startCharter: Date;
+  endCharter: Date;
+  port: string;
+  user: CharterUser;
+  boat: Boat;
 }

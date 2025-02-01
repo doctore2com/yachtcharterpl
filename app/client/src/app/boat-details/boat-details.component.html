@@ -2,40 +2,85 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 
-<div class="container" *ngIf="boat">
-  <mat-card>
+<div class="boat-details-container" *ngIf="boat">
+  <mat-card class="boat-details-card">
     <mat-card-header>
-      <mat-card-title>{{boat.name}}</mat-card-title>
+      <mat-card-title>{{ boat.boatName }}</mat-card-title>
+      <mat-card-subtitle>{{ boat.manufacturer }}</mat-card-subtitle>
     </mat-card-header>
 
-    <img mat-card-image
-         [src]="boat.imageSource || '/assets/sasanka.jpg'"
-         [alt]="boat.name"
-         onerror="this.src='/assets/sasanka.jpg'">
+    <img mat-card-image [src]="boat.imageSource" [alt]="boat.boatName">
 
     <mat-card-content>
-      <p><strong>Opis:</strong> {{boat.description}}</p>
-      <p><strong>Producent:</strong> {{boat.manufacturer}}</p>
-      <p><strong>Armator:</strong> {{boat.landlord}}</p>
-      <p><strong>Miejsca:</strong> {{boat.placesInside}}</p>
-      <p><strong>Kabiny:</strong> {{boat.cabins}}</p>
-      <p><strong>Koje:</strong> {{boat.bunk}}</p>
-      <p><strong>Cena w sezonie:</strong> {{boat.priceInTheSeason}} zł</p>
-      <p><strong>Cena poza sezonem:</strong> {{boat.priceOutOfSeason}} zł</p>
-      <p><strong>Rok produkcji:</strong> {{boat.year}}</p>
-      <p><strong>Moc silnika:</strong> {{boat.power}} KM</p>
-      <p><strong>Zasięg:</strong> {{boat.distance}} mil morskich</p>
+      <div class="details-section">
+        <h3>Szczegóły techniczne</h3>
+        <div class="details-grid">
+          <div class="detail-item">
+            <mat-icon>group</mat-icon>
+            <span>Miejsca: {{ boat.placesInside }}</span>
+          </div>
+          <div class="detail-item">
+            <mat-icon>hotel</mat-icon>
+            <span>Koje: {{ boat.bunk }}</span>
+          </div>
+          <div class="detail-item">
+            <mat-icon>meeting_room</mat-icon>
+            <span>Kabiny: {{ boat.cabins }}</span>
+          </div>
+          <div class="detail-item">
+            <mat-icon>speed</mat-icon>
+            <span>Moc: {{ boat.power }} KM</span>
+          </div>
+          <div class="detail-item">
+            <mat-icon>calendar_today</mat-icon>
+            <span>Rok produkcji: {{ boat.year }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="price-section">
+        <h3>Cennik</h3>
+        <div class="price-grid">
+          <div class="price-item">
+            <span class="price-label">Cena w sezonie:</span>
+            <span class="price-value">{{ boat.priceInTheSeason }} zł/doba</span>
+          </div>
+          <div class="price-item">
+            <span class="price-label">Cena poza sezonem:</span>
+            <span class="price-value">{{ boat.priceOutOfSeason }} zł/doba</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="description-section">
+        <h3>Opis</h3>
+        <p>{{ boat.description }}</p>
+      </div>
+
+      <div class="owner-section">
+        <h3>Armator</h3>
+        <p>{{ boat.landlord }}</p>
+      </div>
     </mat-card-content>
 
     <mat-card-actions>
-      <button mat-raised-button color="primary" [routerLink]="['/charter-form', boat.id]">
-        Zarezerwuj
+      <ng-container *ngIf="authService.isLoggedIn(); else loginPrompt">
+        <button mat-raised-button color="primary" [routerLink]="['/charter-form', boat.id]">
+          Zarezerwuj
+        </button>
+      </ng-container>
+      <ng-template #loginPrompt>
+        <div class="login-prompt">
+          <a mat-button color="accent" routerLink="/login">Zaloguj się, aby zarezerwować</a>
+        </div>
+      </ng-template>
+      <button mat-button [routerLink]="['/boats']">
+        Powrót do listy
       </button>
-      <button mat-button [routerLink]="['/boats']">Powrót</button>
     </mat-card-actions>
   </mat-card>
 </div>
 
-<div *ngIf="error" class="error-message">
-  {{error}}
+<div class="error-message" *ngIf="error">
+  {{ error }}
 </div>

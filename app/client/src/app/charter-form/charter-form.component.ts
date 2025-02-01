@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CharterService } from '../services/charter.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { BoatService } from '../services/boat.service';
+import { AuthService } from '../services/auth.service';
 import { Charter } from '../models/charter.model';
+import { Boat } from '../models/boat.model';
+import { CharterUser } from '../models/charter-user.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-charter-form',
@@ -12,122 +16,79 @@ import { Charter } from '../models/charter.model';
 })
 export class CharterFormComponent implements OnInit {
   charterForm: FormGroup;
-  boatId: number;
+  boat: Boat | null = null;
   today = new Date();
+  error: string | null = null;
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private charterService: CharterService,
     private router: Router,
+    private charterService: CharterService,
+    private boatService: BoatService,
+    private authService: AuthService,
     private snackBar: MatSnackBar
   ) {
-    this.boatId = 0;
-    this.initForm();
-  }
-
-  private initForm() {
     this.charterForm = this.fb.group({
       name: ['', Validators.required],
       description: [''],
-      startCharter: [null, Validators.required],
-      endCharter: [null, Validators.required],
-      port: ['', Validators.required],
-      userId: [1]
-    });
-
-    // Dodajemy nasłuchiwanie zmian w formularzu
-    this.charterForm.valueChanges.subscribe(() => {
-      console.log('Form valid:', this.charterForm.valid);
-      console.log('Form value:', this.charterForm.value);
+      startCharter: ['', Validators.required],
+      endCharter: ['', Validators.required],
+      port: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
-    const boatIdParam = this.route.snapshot.paramMap.get('boatId');
-    if (boatIdParam) {
-      this.boatId = Number(boatIdParam);
-    } else {
-      console.error('No boatId provided');
-      this.snackBar.open('Błąd: Brak ID łodzi', 'OK', {
-        duration: 3000,
-        horizontalPosition: 'center',
-        verticalPosition: 'top',
+    const boatId = this.route.snapshot.params['boatId'];
+    if (boatId) {
+      this.boatService.getBoat(boatId).subscribe({
+        next: (boat) => {
+          this.boat = boat;
+        },
+        error: (error) => {
+          console.error('Error loading boat:', error);
+          this.snackBar.open('Error loading boat details', 'OK', { duration: 3000 });
+        }
       });
-      this.router.navigate(['/boats']);
     }
   }
 
-  private formatDate(date: Date): string {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    const seconds = String(date.getSeconds()).padStart(2, '0');
+  onSubmit(): void {
+    console.log('Czy użytkownik jest zalogowany:', this.authService.isLoggedIn());
+    console.log('Aktualny użytkownik:', this.authService.getUser());
 
-    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-  }
-
-  onSubmit() {
-    if (this.charterForm.valid) {
-      const startDate = this.charterForm.get('startCharter')?.value;
-      const endDate = this.charterForm.get('endCharter')?.value;
-
-      console.log('Daty przed formatowaniem:', { startDate, endDate });
+    if (this.charterForm.valid && this.boat) {
+      const currentUser = this.authService.getUser();
+      if (!currentUser) {
+        this.snackBar.open('Musisz być zalogowany, aby utworzyć rezerwację', 'OK', { duration: 3000 });
+        return;
+      }
 
       const charter: Charter = {
-        boat: {
-          id: this.boatId
-        },
+        charterName: this.charterForm.value.name,
+        description: this.charterForm.value.description,
+        startCharter: this.charterForm.value.startCharter,
+        endCharter: this.charterForm.value.endCharter,
+        port: this.charterForm.value.port,
+        boat: this.boat,
         user: {
-          id: 1
-        },
-        name: this.charterForm.get('name')?.value,
-        description: this.charterForm.get('description')?.value || '',
-        startCharter: this.formatDateToString(startDate),
-        endCharter: this.formatDateToString(endDate),
-        port: this.charterForm.get('port')?.value
+          id: currentUser.id,
+          username: currentUser.username,
+          email: currentUser.email
+        }
       };
-
-      console.log('Obiekt Charter do wysłania:', charter);
 
       this.charterService.createCharter(charter).subscribe({
         next: (response) => {
-          console.log('Sukces:', response);
-          this.snackBar.open('Rezerwacja została utworzona!', 'OK', {
-            duration: 3000
-          });
+          console.log('Rezerwacja utworzona:', response);
           this.router.navigate(['/charters']);
         },
         error: (error) => {
-          console.error('Błąd:', error);
-          let errorMessage = 'Wystąpił błąd podczas tworzenia rezerwacji';
-          if (error.error?.message) {
-            errorMessage += ': ' + error.error.message;
-          }
-          this.snackBar.open(errorMessage, 'OK', { duration: 5000 });
+          console.error('Błąd podczas tworzenia rezerwacji:', error);
+          this.snackBar.open('Musisz być zalogowany, aby utworzyć rezerwację', 'OK', { duration: 3000 });
         }
       });
-    } else {
-      this.snackBar.open('Formularz zawiera błędy. Sprawdź wszystkie pola.', 'OK', {
-        duration: 3000
-      });
     }
-  }
-
-  private formatDateToString(date: Date): string {
-    if (!date) return '';
-    // Konwertujemy string na obiekt Date jeśli to konieczne
-    const d = typeof date === 'string' ? new Date(date) : date;
-
-    // Formatujemy datę do wymaganego formatu
-    const year = d.getFullYear();
-    const month = String(d.getMonth() + 1).padStart(2, '0');
-    const day = String(d.getDate()).padStart(2, '0');
-
-    // Zwracamy datę w formacie YYYY-MM-DD HH:mm:ss
-    return `${year}-${month}-${day} 12:00:00`;
   }
 
   compareDates(start: Date, end: Date): boolean {

@@ -7,8 +7,8 @@
         <div class="form-row">
           <mat-form-field appearance="outline">
             <mat-label>Nazwa jachtu</mat-label>
-            <input matInput formControlName="name" required>
-            <mat-error *ngIf="boatForm.get('name')?.hasError('required')">
+            <input matInput formControlName="boatName" required>
+            <mat-error *ngIf="boatForm.get('boatName')?.hasError('required')">
               Nazwa jest wymagana
             </mat-error>
           </mat-form-field>

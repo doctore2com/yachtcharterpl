@@ -1,34 +1,33 @@
-<div class="container">
-  <h2>Lista rezerwacji</h2>
+<div class="charters-container">
+  <h2 class="page-title">Lista rezerwacji</h2>
 
-  <div *ngIf="loading" class="loading">
-    <p>Ładowanie rezerwacji...</p>
-  </div>
+  <div class="charters-grid">
+    <mat-card class="charter-card" *ngFor="let charter of charters">
+      <mat-card-header>
+        <mat-card-title>{{ charter.charterName }}</mat-card-title>
+        <mat-card-subtitle>{{ charter.boat.boatName }}</mat-card-subtitle>
+      </mat-card-header>
 
-  <div *ngIf="error" class="error">
-    <p>Wystąpił błąd podczas ładowania rezerwacji</p>
-  </div>
+      <mat-card-content>
+        <div class="charter-details">
+          <div class="detail-item">
+            <mat-icon>location_on</mat-icon>
+            <span>Port: {{ charter.port }}</span>
+          </div>
 
-  <div *ngIf="!loading && !error">
-    <div class="charters-grid" *ngIf="charters.length > 0">
-      <mat-card *ngFor="let charter of charters">
-        <mat-card-header>
-          <mat-card-title>Rezerwacja: {{ charter.name }}</mat-card-title>
-          <mat-card-subtitle>Port: {{ charter.port }}</mat-card-subtitle>
-        </mat-card-header>
+          <div class="detail-item">
+            <mat-icon>event</mat-icon>
+            <span>Od: {{ charter.startCharter | date:'dd/MM/yyyy' }}</span>
+          </div>
 
-        <mat-card-content>
-          <p *ngIf="charter.description">{{ charter.description }}</p>
-          <p><strong>Data rozpoczęcia:</strong> {{ charter.startCharter | date:'dd/MM/yyyy HH:mm' }}</p>
-          <p><strong>Data zakończenia:</strong> {{ charter.endCharter | date:'dd/MM/yyyy HH:mm' }}</p>
-          <p><strong>Łódź:</strong> {{ charter.boat?.id }}</p>
-          <p><strong>Użytkownik:</strong> {{ charter.user?.id }}</p>
-        </mat-card-content>
-      </mat-card>
-    </div>
+          <div class="detail-item">
+            <mat-icon>event_busy</mat-icon>
+            <span>Do: {{ charter.endCharter | date:'dd/MM/yyyy' }}</span>
+          </div>
+        </div>
 
-    <div *ngIf="charters.length === 0" class="no-charters">
-      <p>Brak rezerwacji do wyświetlenia</p>
-    </div>
+        <p class="description">{{ charter.description }}</p>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>

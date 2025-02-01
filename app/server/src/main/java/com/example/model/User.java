@@ -27,17 +27,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Size(max = 20)
+    @Column(nullable = false, unique = true)
     private String username;
 
-    @NotBlank
-    @Size(max = 50)
-    @Email
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @NotBlank
-    @Size(max = 120)
+    @Column(nullable = false)
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
