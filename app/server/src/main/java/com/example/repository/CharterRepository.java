@@ -24,7 +24,7 @@ public interface CharterRepository extends JpaRepository<Charter,Long> {
             @Param("endDate") Date endDate
     );
 
-    List<Charter> findByUserId(Long id);
+    List<Charter> findByUserId(Long userId);
 
 
 
@@ -32,6 +32,3 @@ public interface CharterRepository extends JpaRepository<Charter,Long> {
 
 
 //List<Charter> findCharterByBoatId(Long id);
-
-
-

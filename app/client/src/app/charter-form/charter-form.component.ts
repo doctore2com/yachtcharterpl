@@ -19,6 +19,7 @@ export class CharterFormComponent implements OnInit {
   boat: Boat | null = null;
   today = new Date();
   error: string | null = null;
+  boatId: number;
 
   constructor(
     private fb: FormBuilder,
@@ -30,7 +31,7 @@ export class CharterFormComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {
     this.charterForm = this.fb.group({
-      name: ['', Validators.required],
+      charterName: ['', Validators.required],
       description: [''],
       startCharter: ['', Validators.required],
       endCharter: ['', Validators.required],
@@ -39,9 +40,9 @@ export class CharterFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const boatId = this.route.snapshot.params['boatId'];
-    if (boatId) {
-      this.boatService.getBoat(boatId).subscribe({
+    this.boatId = Number(this.route.snapshot.paramMap.get('id'));
+    if (this.boatId) {
+      this.boatService.getBoat(this.boatId).subscribe({
         next: (boat) => {
           this.boat = boat;
         },
@@ -65,7 +66,7 @@ export class CharterFormComponent implements OnInit {
       }
 
       const charter: Charter = {
-        charterName: this.charterForm.value.name,
+        charterName: this.charterForm.value.charterName,
         description: this.charterForm.value.description,
         startCharter: this.charterForm.value.startCharter,
         endCharter: this.charterForm.value.endCharter,
@@ -81,11 +82,16 @@ export class CharterFormComponent implements OnInit {
       this.charterService.createCharter(charter).subscribe({
         next: (response) => {
           console.log('Rezerwacja utworzona:', response);
+          this.snackBar.open('Rezerwacja została utworzona pomyślnie', 'OK', {
+            duration: 3000
+          });
           this.router.navigate(['/charters']);
         },
         error: (error) => {
           console.error('Błąd podczas tworzenia rezerwacji:', error);
-          this.snackBar.open('Musisz być zalogowany, aby utworzyć rezerwację', 'OK', { duration: 3000 });
+          this.snackBar.open('Błąd podczas tworzenia rezerwacji', 'OK', {
+            duration: 3000
+          });
         }
       });
     }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CharterService } from '../services/charter.service';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 import { Charter } from '../models/charter.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -10,30 +12,34 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class CharterListComponent implements OnInit {
   charters: Charter[] = [];
-  error: string = '';
+  loading = false;
+  error = '';
   noCharters: boolean = false;
-  loading: boolean = false;
 
   constructor(
     private charterService: CharterService,
+    public authService: AuthService,
+    private router: Router,
     private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
-    this.loadCharters();
-  }
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/login']);
+      return;
+    }
 
-  loadCharters(): void {
     this.loading = true;
-    this.charterService.getAllCharters().subscribe({
-      next: (data) => {
-        this.charters = data;
-        this.noCharters = data.length === 0;
+    const userId = this.authService.getUserId();
+
+    this.charterService.getChartersByUserId(userId).subscribe({
+      next: (charters) => {
+        this.charters = charters;
+        this.noCharters = charters.length === 0;
         this.loading = false;
       },
-      error: (err) => {
-        console.error('Błąd podczas pobierania rezerwacji:', err);
-        this.error = 'Nie udało się załadować listy rezerwacji';
+      error: (error) => {
+        this.error = 'Nie udało się załadować rezerwacji';
         this.loading = false;
       }
     });

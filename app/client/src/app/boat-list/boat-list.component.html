@@ -61,9 +61,6 @@
             </mat-card-content>
 
             <mat-card-actions>
-              <button mat-raised-button color="primary" [routerLink]="['/charter-form', boat.id]">
-                Zarezerwuj
-              </button>
               <button mat-button color="accent" [routerLink]="['/boats', boat.id]">
                 Szczegóły
               </button>
@@ -75,6 +72,8 @@
   </div>
 </div>
 
-<button mat-fab color="primary" class="add-button" routerLink="/boat-add">
+<button mat-fab color="primary" class="add-button"
+        *ngIf="authService.isLoggedIn()"
+        routerLink="/boat-add">
   <mat-icon>add</mat-icon>
 </button>

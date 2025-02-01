@@ -85,4 +85,14 @@ public class CharterController {
         charterService.deleteCharter(id);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Charter>> getChartersByUserId(@PathVariable Long userId) {
+        try {
+            List<Charter> charters = charterService.findByUserId(userId);
+            return ResponseEntity.ok(charters);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }

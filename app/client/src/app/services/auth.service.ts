@@ -51,4 +51,9 @@ export class AuthService {
     console.log('Token:', this.getToken());
     return !!this.getToken();
   }
+
+  getUserId(): number {
+    const user = this.getUser();
+    return user ? user.id : 0;
+  }
 }

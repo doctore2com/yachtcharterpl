@@ -3,6 +3,7 @@ import { Boat } from "../models/boat.model";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { BoatService } from "../shared/boat/boat.service";
 import { Router } from "@angular/router";
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-boat-add',
@@ -14,7 +15,12 @@ export class BoatAddComponent implements OnInit {
   boatForm: FormGroup;
   selectedFile: File | null = null;
 
-  constructor(private fb: FormBuilder, private boatService: BoatService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private boatService: BoatService,
+    private router: Router,
+    private authService: AuthService
+  ) {
     this.boatForm = this.fb.group({
       boatName: ['', Validators.required],
       description: ['', Validators.required],
@@ -34,6 +40,9 @@ export class BoatAddComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/login']);
+    }
   }
 
   onSubmit() {

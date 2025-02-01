@@ -39,4 +39,8 @@ export class CharterService{
   getCharters(): Observable<Charter[]> {
     return this.http.get<Charter[]>(this.apiUrl);
   }
+
+  getChartersByUserId(userId: number): Observable<Charter[]> {
+    return this.http.get<Charter[]>(`${this.apiUrl}/user/${userId}`);
+  }
 }

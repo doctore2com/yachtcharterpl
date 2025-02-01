@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BoatService } from '../services/boat.service';
 import { Boat } from '../models/boat.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-boat-list',
@@ -15,7 +16,8 @@ export class BoatListComponent implements OnInit {
 
   constructor(
     private boatService: BoatService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public authService: AuthService
   ) {
   }
 

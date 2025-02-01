@@ -11,7 +11,7 @@ export class AppComponent {
   title = 'Yacht Charter';
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router
   ) {}
 

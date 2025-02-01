@@ -140,4 +140,8 @@ public class CharterService {
         }
     }
 
+    public List<Charter> findByUserId(Long userId) {
+        return charterRepository.findByUserId(userId);
+    }
+
 }
