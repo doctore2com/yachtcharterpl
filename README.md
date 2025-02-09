@@ -81,14 +81,17 @@ W przypadku, gdy użytkownik chce potwierdzić rezerwację,  zostaje przeniesion
 	
 Ostatnim etapem procesu rezerwacyjnego jest potwierdzenie rezerwacji poprzez naciśnięcie przycisku Zarezerwuj.
 Jeśli użytkownik rozmyśli się w odniesieniu do danego jachtu, może nacisnąć przycisk Anuluj na formularzu. W ten sposób jacht ponownie będzie możliwy do wynajmu w danym okresie. 
-Po prawidłowej rezerwacji jachtu na dany okres wyświetli się informacja o rezerwacji, a tym samym rezerwacja będzie dostępna w karcie Lista rezerwacji w górnym menu. Listę rezerwacji została udostępniona na rysunku 
+Po prawidłowej rezerwacji jachtu na dany okres wyświetli się informacja o rezerwacji, a tym samym rezerwacja będzie dostępna w karcie Lista rezerwacji w górnym menu. Listę rezerwacji została udostępniona na Rysunku 
 
 ![image](https://github.com/user-attachments/assets/dcb4f4ef-ce59-446a-8ac5-b0248c12de8a)
 
 
 Dodawanie jachtu do bazy ofert
 
-Użytkownik (armator lub administrator) posiada możliwość dodania nowej oferty do bazy danych. Aby dodać taką ofertę użytkownik naciska przycisk Dodaj jacht w górnym menu, a następnie uzupełnia wszystkie pola dostępne dla jednostki: nazwa, krótki opis, liczba łóżek, liczba kabin, maksymalny dystans do przepłynięciu na silniku (zależne od pojemności baku na paliwo), producent jednostki, nazwa armatora, ilość miejsc na pokładzie, moc silnika (mierzona w koniach mechanicznych), cena za jeden dzień w sezonie wysokim, cena za jeden dzień w sezonie niskim, rok produkcji jednostki, dodanie zdjęcia do oferty (domyślnie z katalogu \client\src\assets\). Formularz dodawania nowego jachtu do bazy danych został przedstawiony na Rysunku 4.7.
+Użytkownik (armator lub administrator) posiada możliwość dodania nowej oferty do bazy danych. Aby dodać taką ofertę użytkownik naciska przycisk Dodaj jacht w górnym menu, a następnie uzupełnia wszystkie pola dostępne dla jednostki: nazwa, krótki opis, liczba łóżek, liczba kabin, maksymalny dystans do przepłynięciu na silniku (zależne od pojemności baku na paliwo), producent jednostki, nazwa armatora, ilość miejsc na pokładzie, moc silnika (mierzona w koniach mechanicznych), cena za jeden dzień w sezonie wysokim, cena za jeden dzień w sezonie niskim, rok produkcji jednostki, dodanie zdjęcia do oferty (domyślnie z katalogu \client\src\assets\). Formularz dodawania nowego jachtu do bazy danych został przedstawiony na Rysunku.
+
+![image](https://github.com/user-attachments/assets/7b5d60a0-8c25-4bb1-815e-4da9f500e082)
+
 
 
 Użytkownicy
