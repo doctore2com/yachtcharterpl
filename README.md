@@ -86,7 +86,7 @@ Po prawidłowej rezerwacji jachtu na dany okres wyświetli się informacja o rez
 ![image](https://github.com/user-attachments/assets/dcb4f4ef-ce59-446a-8ac5-b0248c12de8a)
 
 
-Dodawanie jachtu do bazy ofert
+**Dodawanie jachtu do bazy ofert**
 
 Użytkownik (armator lub administrator) posiada możliwość dodania nowej oferty do bazy danych. Aby dodać taką ofertę użytkownik naciska przycisk Dodaj jacht w górnym menu, a następnie uzupełnia wszystkie pola dostępne dla jednostki: nazwa, krótki opis, liczba łóżek, liczba kabin, maksymalny dystans do przepłynięciu na silniku (zależne od pojemności baku na paliwo), producent jednostki, nazwa armatora, ilość miejsc na pokładzie, moc silnika (mierzona w koniach mechanicznych), cena za jeden dzień w sezonie wysokim, cena za jeden dzień w sezonie niskim, rok produkcji jednostki, dodanie zdjęcia do oferty (domyślnie z katalogu \client\src\assets\). Formularz dodawania nowego jachtu do bazy danych został przedstawiony na Rysunku.
 
@@ -94,7 +94,7 @@ Użytkownik (armator lub administrator) posiada możliwość dodania nowej ofert
 
 
 
-Użytkownicy
+**Użytkownicy**
 
 Użytkownicy do testów:
 
