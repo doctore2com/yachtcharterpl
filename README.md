@@ -1,6 +1,6 @@
-#YachtCharterPl#
+##YachtCharterPl##
 
-System wykonany w ramach pracy inżynierskiej.
+**System wykonany w ramach pracy inżynierskiej.**
 
 Temat: System webowy wspomagający rezerwację jachtów.
 
