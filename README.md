@@ -59,7 +59,7 @@ Użytkownicy mogą wyszukiwać jachty na podstawie dostępnych filtrów:
 - Cena w sezonie
 
 
-Po wybraniu odpowiednich filtrów użytkownik otrzymuje listę jachtów spełniających kryteria. Każdy jacht posiada krótki opis w postaci: nazwy jednostki, opisu, liczby miejsc na pokładzie, ceny za wynajem. Na rysunku 4.3 przedstawiono wygląd listy jachtów wraz z filtrami.
+Po wybraniu odpowiednich filtrów użytkownik otrzymuje listę jachtów spełniających kryteria. Każdy jacht posiada krótki opis w postaci: nazwy jednostki, opisu, liczby miejsc na pokładzie, ceny za wynajem. Na rysunku przedstawiono wygląd listy jachtów wraz z filtrami.
 
 ![image](https://github.com/user-attachments/assets/d8a42122-240d-4586-87ca-35fa27b1dde7)
 
@@ -67,7 +67,10 @@ Po wybraniu odpowiednich filtrów użytkownik otrzymuje listę jachtów spełnia
 
 Przeglądanie szczegółów jachtu
 
-Użytkownik przechodząc na kartę danej jednostki otrzymuje następujące informacje takie jak: zdjęcie jednostki, nazwa, krótki opis, liczba łóżek, liczba kabin, maksymalny dystans do przepłynięciu na silniku (zależne od pojemności baku na paliwo), producent jednostki, nazwa armatora, opinie, liczba miejsc na pokładzie, moc silnika (mierzona w koniach mechanicznych), cena za jeden dzień w sezonie wysokim, cena za jeden dzień w sezonie niskim, rok produkcji jednostki. Na Rysunku 4.4 przedstawiono dane szczegółowe jachtu. 
+Użytkownik przechodząc na kartę danej jednostki otrzymuje następujące informacje takie jak: zdjęcie jednostki, nazwa, krótki opis, liczba łóżek, liczba kabin, maksymalny dystans do przepłynięciu na silniku (zależne od pojemności baku na paliwo), producent jednostki, nazwa armatora, opinie, liczba miejsc na pokładzie, moc silnika (mierzona w koniach mechanicznych), cena za jeden dzień w sezonie wysokim, cena za jeden dzień w sezonie niskim, rok produkcji jednostki. Na Rysunku przedstawiono dane szczegółowe jachtu. 
+
+![image](https://github.com/user-attachments/assets/82f7be33-27f5-4d36-b08e-4d685de1aff7)
+
  
 
 Potwierdzenie rezerwacji
