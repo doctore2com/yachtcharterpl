@@ -6,6 +6,7 @@ import { CharterFormComponent } from './charter-form/charter-form.component';
 import { BoatAddComponent } from './boat-add/boat-add.component';
 import { LoginComponent } from './login/login.component';
 import { CharterListComponent } from './charter-list/charter-list.component';
+import { BoatEditComponent } from './boat-edit/boat-edit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/boats', pathMatch: 'full' },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'charter-form/:id', component: CharterFormComponent },
   { path: 'login', component: LoginComponent },
   { path: 'charters', component: CharterListComponent },
+  { path: 'boats/:id/edit', component: BoatEditComponent },
 ];
 
 @NgModule({

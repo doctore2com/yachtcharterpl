@@ -64,6 +64,14 @@
               <button mat-button color="accent" [routerLink]="['/boats', boat.id]">
                 Szczegóły
               </button>
+              <ng-container *ngIf="canModifyBoat(boat)">
+                <button mat-button color="primary" (click)="updateBoat(+(boat?.id || 0))">
+                  <mat-icon>edit</mat-icon> Edytuj
+                </button>
+                <button mat-button color="warn" (click)="deleteBoat(+(boat?.id || 0))">
+                  <mat-icon>delete</mat-icon> Usuń
+                </button>
+              </ng-container>
             </mat-card-actions>
           </mat-card>
         </div>
@@ -73,7 +81,7 @@
 </div>
 
 <button mat-fab color="primary" class="add-button"
-        *ngIf="authService.isLoggedIn()"
+        *ngIf="isAdmin() || isModerator()"
         routerLink="/boat-add">
   <mat-icon>add</mat-icon>
 </button>

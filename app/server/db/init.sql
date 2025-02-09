@@ -62,17 +62,24 @@ TRUNCATE TABLE roles;
 TRUNCATE TABLE users;
 SET FOREIGN_KEY_CHECKS = 1;
 
--- Dodawanie ról
 INSERT INTO roles(id, name) VALUES(1, 'ROLE_USER');
 INSERT INTO roles(id, name) VALUES(2, 'ROLE_MODERATOR');
 INSERT INTO roles(id, name) VALUES(3, 'ROLE_ADMIN');
+INSERT INTO roles(id, name) VALUES(4, 'ROLE_SAILOR');
 
--- Dodawanie użytkownika (zahashowane hasło BCrypt dla 'user1')
+-- Dodawanie użytkowników
 INSERT INTO users (id, username, email, password) VALUES
-(1, 'user1', 'user1@example.com', 'user1');
+                                                      (1, 'user1', 'user1@example.com', 'user1'),
+                                                      (2, 'admin', 'admin@example.com', 'admin123'),
+                                                      (3, 'sailor1', 'sailor1@example.com', 'sailor123'),
+                                                      (4, 'mod1', 'mod1@example.com', 'mod123');
 
--- Przypisanie roli użytkownikowi
-INSERT INTO user_roles(user_id, role_id) VALUES(1, 1);
+-- Przypisanie ról użytkownikom
+INSERT INTO user_roles(user_id, role_id) VALUES(1, 1);  -- user -> ROLE_USER
+INSERT INTO user_roles(user_id, role_id) VALUES(2, 3);  -- admin -> ROLE_ADMIN
+INSERT INTO user_roles(user_id, role_id) VALUES(3, 4);  -- sailor1 -> ROLE_SAILOR
+INSERT INTO user_roles(user_id, role_id) VALUES(4, 2);  -- mod1 -> ROLE_MODERATOR
+
 
 -- Przykładowe łodzie
 INSERT INTO boats (boat_name, description, opinions, landlord, manufacturer, image_source, places_inside, cabins, bunk, price_in_the_season, price_out_of_season, year, power, distance) VALUES
