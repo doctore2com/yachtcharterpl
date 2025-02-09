@@ -1,206 +1,68 @@
+YachtCharterPl
 
-MVN:
+System wykonany w ramach pracy in¿ynierskiej.
 
-mvn dependency:purge-local-repository
-mvn dependency:resolve
-mvn clean package -Dmaven.test.skip=true
-mvn clean install -U  (w app/server)
+Temat: System webowy wspomagaj¹cy rezerwacjê jachtów.
+Stan na: 09.02.2025
+Struktura 
+System sk³ada siê z nastêpuj¹cych warstw:
+Frontend:
+Technologie: HTML5, CSS3, JavaScript (AngularJS).
+Responsywnoœæ: Dostosowanie aplikacji do ró¿nych urz¹dzeñ. 
+Interaktywnoœæ: Komponenty UI, formularze.
+Backend:
+Technologie: framework Spring Boot, Java.
+Autoryzacja i uwierzytelnianie: format JSON, standard Oauth.
+Baza danych:
+Relacyjna baza danych MySQL, w której zaprojektowano tabele:
+Tabele u¿ytkowników (u¿ytkownicy – klienci, armatorzy, administrator).
+Tabele z ofertami jachtów (informacje o jachcie, lokalizacja, ceny).
+Tabele z rezerwacjami – czarterami (informacje o wynajmie).
+Kwestia bezpieczeñstwa:
+Bezpieczne przechowywanie hase³: hashowanie hase³.
+Wdro¿enie aplikacji:
+CI/CD: wykorzystanie repozytorium kodu na GitHub.
+Konteneryzacja: Docker.
+Testowanie:
+Testowanie REST API przy u¿yciu narzêdzia Postman (kolekcja testów w katalogu yachtcharterpl\app\testy.postman_collection)
+Opis systemu
+Wszystkie strony s¹ responsywne i wyœwietlaj¹ siê poprawnie na urz¹dzeniach mobilnych.
 
-mvn clean install -DskipTests 
-mvn spring-boot:run (w master/yachtcharterpl/app/server)
+Wyszukiwanie jachtów
 
-mvn -version
+U¿ytkownicy mog¹ wyszukiwaæ jachty na podstawie dostêpnych filtrów:
+Liczba miejsc na pok³adzie, liczba kabin: Wybór wielkoœci jachtu w odniesieniu do potrzeb
+Rok produkcji jachtu
+Cena w sezonie
+    Po wybraniu odpowiednich filtrów u¿ytkownik otrzymuje listê jachtów spe³niaj¹cych kryteria. Ka¿dy jacht posiada krótki opis w postaci: nazwy jednostki, opisu, liczby miejsc na pok³adzie, ceny za wynajem. Na rysunku 4.3 przedstawiono wygl¹d listy jachtów wraz z filtrami.
 
-npm install
+Przegl¹danie szczegó³ów jachtu
 
-
-DOCKER:
+	U¿ytkownik przechodz¹c na kartê danej jednostki otrzymuje nastêpuj¹ce informacje takie jak: zdjêcie jednostki, nazwa, krótki opis, liczba ³ó¿ek, liczba kabin, maksymalny dystans do przep³yniêciu na silniku (zale¿ne od pojemnoœci baku na paliwo), producent jednostki, nazwa armatora, opinie, liczba miejsc na pok³adzie, moc silnika (mierzona w koniach mechanicznych), cena za jeden dzieñ w sezonie wysokim, cena za jeden dzieñ w sezonie niskim, rok produkcji jednostki. Na Rysunku 4.4 przedstawiono dane szczegó³owe jachtu. 
  
-docker-compose down
-docker compose down --remove-orphans -v    !!!!!
-docker-compose up --build
-docker-compose up db
-docker stop $(docker ps -a -q)
-docker-compose
-docker volume ls
-docker volume rm yacht-charter-mysql-data
-docker volume prune
 
-docker compose -f docker-compose.yml down --remove-orphans -v  !!!!!
-docker-compose -f docker-compose.yml up --build  !!!!!
+Potwierdzenie rezerwacji
 
-BASH:
-
-netstat -aon | find /i "listening"
-tasklist /fi "pid eq 11400"
-taskkill /F /PID 11400
-net stop mysql80
-net start mysql80
+	W przypadku, gdy u¿ytkownik chce potwierdziæ rezerwacjê,  zostaje przeniesiony na osobn¹ kartê, gdzie zostanie wyœwietlony formularz rezerwacji (Rysunek 4.5). Dane wyœwietlane w potwierdzeniu rezerwacji to nazwa rezerwacji, opis, data rozpoczêcia, data zakoñczenia oraz port. 
 
 
-MYSQL:
-
-mysql -u root -p
-
-GIT:
-
-git add client
-git status
-git commit -m "update pom.xml"
-git push
-git checkout
-git pull --rebase
-git stash
-git switch rafal-branch
-git fetch origin
-git branch
-git rebase -i HEAD~5
-git push --force-with-lease
-git remote -v
-del .git /F /Q
-
-
-VIM:
-
-\q  wyjscie 
-
-ssh-keygen -t ed25519 -C "milanoitaliana@gmail.com"
-
-
-07.11.2024
-1. Zatrzymanie mysql
-2. Uruchomienie DockerDesktop 
-
-16.11.2024
-1. SkonfigurowaÄ‡ po SSH  VVVVV
-2. SklonowaÄ‡ repo VVVVV
-3. UporzÄ…dkowaÄ‡ notatnik - README i puschowaÄ‡ na repo VVVVV
-
-19.11.2024
-1. ZarchiwizowaÄ‡ pozostaÅ‚e niewykorzystane repo na GIT
-
-23.11.2024
-
-1. DodaÄ‡ klucz prywatny do gitignore i do knonwhost   VVVV DodaÅ‚em do gitignore, ale nie do known-host
-2. Rebuild dziaÅ‚ajÄ…cy VVVVV Restart IDE pomÃ³gÅ‚ 
-3. UzupeÅ‚niÄ‡ zapytania do charters w odniesieniu do boats   VVVVV
-4. PoprawiÄ‡ endpointy wg nomenklatury poniÅ¼ej dla charters i innych   VVVVV
-5. SprawdziÄ‡ pozostaÅ‚e zapytania postman, tak aby zwracaÅ‚y status 200 (m.in. dodaÄ‡ crossorigin tak jak w boatcontroller.  VVVVV
-6. 
-
-GET /boats         - pobierz wszystkie Å‚Ã³dki
-GET /boats/{id}    - pobierz konkretnÄ… Å‚Ã³dkÄ™
-POST /boats        - dodaj nowÄ… Å‚Ã³dkÄ™
-PUT /boats/{id}    - aktualizuj Å‚Ã³dkÄ™
-DELETE /boats/{id} - usuÅ„ Å‚Ã³dkÄ™
-
-26.11.2024 
-
-1. Live Coding na Visual Studio Code (ext. live share)
-2. PozmieniaÄ‡ zapytania na Postman w odniesieniu do AddCharter
-3. DodaÄ‡ do klasy User relacje ManyToOne do charteru VVVVV
-4. RozpisaÄ‡ relacje miÄ™dzy klasami (entities) -> wtyczka, ktÃ³ra generuje wizualnie zaleÅ¼noÅ›ci (boats, charters, users)
-
-CRUD dla charteru (dodawanie rezerwacji
-CRUD dla Å‚odzi (dodawanie, wyÅ›wietlanie, edycja, usuwanie).
-
-
-
-@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "Europe/Warsaw")
-    @Column(name="start_charter")
 	
-30.11.2024
-
-1. Live Coding na Visual Studio Code (ext. live share)  VVVVV
-2. PozmieniaÄ‡ zapytania na Postman w odniesieniu do AddCharter VVVVVV
-3. RozpisaÄ‡ relacje miÄ™dzy klasami (entities) -> wtyczka, ktÃ³ra generuje wizualnie zaleÅ¼noÅ›ci (boats, charters, users)
-
-03.12.2024
-
-1. Visual Studio Code dziaÅ‚ajÄ…ce  VVVVV
-
-7.12.2024
-
-1. ZdefiniowaÄ‡ model w .ts dla kaÅ¼dego obiektu z backendu  VVVVV
-2. boat.service.ts - sprawdziÄ‡ Å›ciezki do backendu czy siÄ™ zgadzajÄ… w odniesieniu do |Postmana ( z jakiegoÅ› powodu TS nie pobiera danych z 8080) VVVVV
-
-chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security 
-
-ng g c charter-form
-
-10.12.2024
-
-1. PrzygotowaÄ‡ listÄ™ Å‚Ã³dek (boat-list), aby siÄ™ poprawnie wyÅ›wietlaÅ‚y z potrzebnymi minimalnymi danymi (w postaci tabeli, jakieÅ› krawÄ™dzie, z przyciskiem WYBIERZ)  VVVVV
-2. WyÅ›wietliÄ‡ danÄ… Å‚Ã³dkÄ™ (boat-details), aby wyÅ›wietlaÅ‚o tylko jeden obiekt z danymi szczegÃ³Å‚owymi i przyciskiem zarezerwuj. VVVVV
-3. SprÃ³bowaÄ‡ dokoÅ„czyÄ‡ charter-form, aby pobraÅ‚ po boat.id dane Å‚Ã³dki z przyciskiem WYCZARTERUJ.
+	Ostatnim etapem procesu rezerwacyjnego jest potwierdzenie rezerwacji poprzez naciœniêcie przycisku Zarezerwuj.
+	Jeœli u¿ytkownik rozmyœli siê w odniesieniu do danego jachtu, mo¿e nacisn¹æ przycisk Anuluj na formularzu. W ten sposób jacht ponownie bêdzie mo¿liwy do wynajmu w danym okresie. 
+	Po prawid³owej rezerwacji jachtu na dany okres wyœwietli siê informacja o rezerwacji, a tym samym rezerwacja bêdzie dostêpna w karcie Lista rezerwacji w górnym menu. Listê rezerwacji zosta³a udostêpniona na rysunku 4.6.
 
 
-21.12.2024
+Dodawanie jachtu do bazy ofert
 
-KsiÄ…Å¼ka 
+	U¿ytkownik (armator lub administrator) posiada mo¿liwoœæ dodania nowej oferty do bazy danych. Aby dodaæ tak¹ ofertê u¿ytkownik naciska przycisk Dodaj jacht w górnym menu, a nastêpnie uzupe³nia wszystkie pola dostêpne dla jednostki: nazwa, krótki opis, liczba ³ó¿ek, liczba kabin, maksymalny dystans do przep³yniêciu na silniku (zale¿ne od pojemnoœci baku na paliwo), producent jednostki, nazwa armatora, iloœæ miejsc na pok³adzie, moc silnika (mierzona w koniach mechanicznych), cena za jeden dzieñ w sezonie wysokim, cena za jeden dzieñ w sezonie niskim, rok produkcji jednostki, dodanie zdjêcia do oferty (domyœlnie z katalogu \client\src\assets\). Formularz dodawania nowego jachtu do bazy danych zosta³ przedstawiony na Rysunku 4.7.
 
-1. BPMN, UML, Diagram sekwencji (relacje miedzy klasami, relacje w bazie)
-2. Tematyka jachtÃ³w (opisaÄ‡ funkcjonalnoÅ›ci z poziomu kontekstu biznesowego)
-3. JPA (opisaÄ‡ co nam daje)
+U¿ytkownicy
+U¿ytkownicy do testów:
 
-Do zrobienia: 
-
-Backend
-
-1. Zwracanie obiektÃ³w zamiast void
-2. Testowanie - postman (nie byÅ‚o potrzeby robiÄ‡ testÃ³w jednostkowych, robiÅ‚em testy manualne w postmanie)
-3. Kolekcje (w Postmanie opracowaÄ‡ odpowiednio na projekt yacht)
-
-22.12.2024
-
-1. Ports are not available: exposing port TCP 0.0.0.0:8080 -> 0.0.0.0:0: listen tcp 0.0.0.0:8080: bind: Tylko jedno uÅ¼ycie kaÅ¼dego adresu gniazda (protokÃ³Å‚/adres sieciowy/port) jest normalnie dozwolone
+Rola: User Login: user1 Has³o: user1
+Rola: Admin Login: admin Has³o: admin123
+Rola: Sailor Login: sailor1 Has³o: sailor123
+Rola: Moderator Login: mode1 Has³o: mod123
 
 
-28.12.2024
 
-1. UruchamiaÄ‡ przez komende w cmd docker-compose -f docker-compose.dev.yml up --build (na razie bez uruchomienia poprzez docker-desktop)
-
-
-04.01.2024
-
-1. Boat-edit component i Boat-add component dodaÄ‡ brakujÄ…ce pola z bazy danych  VVVVV
-2. RozwiÄ…zaÄ‡ bÅ‚Ä™dy po commicie z frontendu VVVV
-3. PodpiÄ…Ä‡ pod boat-list bootstrapa
-
-07.01.2024
-
-1. PodpiÄ…Ä‡ pod boat-list bootstrapa 
-2. DokoÅ„czyÄ‡ #TODO  VVVVV
-3. PoprawiÄ‡ jeden bÅ‚Ä…d VVVVV
-
-11.01.2025
-
-1. UsunÄ…Ä‡ targer folder  VVVVV
-2. mvn clean install   VVVVV
-3. build VVVVV
-4. sprawdziÄ‡ bÅ‚Ä™dy VVVVV
-
-17.01.2025
-
-1. DokoÅ„czyÄ‡ #TODO w odniesieniu do Boat-Add
-
-20.01.2025
-
-1. mvc mikroserwisowo, REST API, SPA
-
-Backend komunikacja przez api (mvc z repo plus baza danych)  VVVVV
-Frontend SPA  VVVVV
-
-
-wziÄ™te z DDD (domain driven desaing). wprowadzenie warstwy abstrakcji na bazie danych. baza dnaych moze zmieniaÄ‡ siÄ™ wraz z rozwojem potrzeb po stronie logiki biznesowej.
-
-MySQL Bench pobraÄ‡
- 
-
-2. do instrukcji Docker compose up (ksiÄ…zka)
-
-3. Pobierz Docker desktop i Docker compose (dodaÄ‡ do instrukcji przy pobieraniu).
-
-
-Pliki inicjalizujÄ…ce do bazy danych (Copy/Paste)  - gdzieÅ› to dodaÄ‡ do ksiÄ…Å¼ki
-Mockup uÅ¼ytkownika (makiety uÅ¼ytkownika) - to takÅ¼e dodaÄ‡ do ksiÄ…zki

@@ -5,7 +5,7 @@ import { Boat } from "../../models/boat.model";
 
 @Injectable({providedIn:'root'})
 export class BoatService {
-  private apiUrl = '/api/boats';  // zmiana na względną ścieżkę
+  private apiUrl = '/api/boats';
 
   constructor(private http: HttpClient) {
   }

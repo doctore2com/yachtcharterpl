@@ -29,7 +29,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-//import com.bezkoder.springjwt.security.services.UserDetailsImpl;
 
 
 
@@ -149,7 +148,7 @@ public class AuthController {
         }
 
         user.setRoles(roles);
-      //  userRepository.save(user);  tutaj jest bład  - odkomentowąć to później zakomentowane
+
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }

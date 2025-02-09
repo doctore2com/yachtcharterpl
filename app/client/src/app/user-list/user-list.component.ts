@@ -40,18 +40,6 @@ export class UserListComponent implements OnInit {
         console.log("exception occured")
       });
   }
-
-    // 1 dodajesz plik user.model.ts i tworzysz go na podstawie encji z bazy danych (java) z zachowaniem typow
-    // ze zmiennej model pobierac po kluczu wartosci i przypisywac je do obiektu
-    // bedziesz mial wtedy obiekt user (zmienic trzeba sygnature w serwisie na UserModel zamiast any
-
-    //2 implementacje z serwisu przenosisz do komponentu
-    //  { name : this.model.name
-
-    //  this.userService.save(user).subscribe(data => {
- //   console.log(data);
-    //przekierowanie
-    // })
   }
 
 

@@ -47,19 +47,4 @@ export class RegisterComponent implements OnInit {
 
 
     }}}
-//       {
-//         next: () => {
-//           console.log("Uzytkownik został zarejestrowany pomyslnie");
-//           this.router.navigate(['/login']);
-//         },
-//         error: (error) => {
-//           console.error("Blad podczas dodawania użytkownika", error);
-//         }
-//       });
-//   } else {
-//   console.log('Formularz jest nieprawidlowy');
-//   Object.keys(this.registerForm.controls).forEach(key => {
-//   const control = this.registerForm.get(key);
-//   if (control?.invalid) {
-//   console.log(`Pole ${key} jest nieprawidlowe:`, control.errors);
-// }}}
+

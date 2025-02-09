@@ -11,10 +11,6 @@ export class UserService {
   public API = 'http://localhost:8080';
   public USER_API = this.API + '/registration';
 
-  // id:number;
-  // username:string;
-  // email:string;
-  // password:string;
 
 
 

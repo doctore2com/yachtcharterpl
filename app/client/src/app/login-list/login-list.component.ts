@@ -28,11 +28,6 @@ export class LoginListComponent implements OnInit {
       this.msg="Bad credentials, please enter valid email and password";
     });
 }
-
-  // gotoregistration(){
-  //   this.router.navigate(['/registration'])
-  // }
-
 }
 
 
