@@ -1,4 +1,4 @@
-*YachtCharterPl*
+**YachtCharterPl**
 
 **System wykonany w ramach pracy inżynierskiej.**
 
@@ -6,52 +6,52 @@ Temat: System webowy wspomagający rezerwację jachtów.
 
 Stan na: 09.02.2025
 
-Struktura 
+**Struktura**
 
-System składa się z następujących warstw:
+**System składa się z następujących warstw:**
 
-Frontend:
+**Frontend:**
 
 Technologie: HTML5, CSS3, JavaScript (AngularJS).
 Responsywność: Dostosowanie aplikacji do różnych urządzeń. 
 Interaktywność: Komponenty UI, formularze.
 
 
-Backend:
+**Backend:**
 
 Technologie: framework Spring Boot, Java.
 
 Autoryzacja i uwierzytelnianie: format JSON, standard Oauth.
 
-Baza danych:
+**Baza danych:**
 Relacyjna baza danych MySQL, w której zaprojektowano tabele:
 
 Tabele użytkowników (użytkownicy – klienci, armatorzy, administrator).
 Tabele z ofertami jachtów (informacje o jachcie, lokalizacja, ceny).
 Tabele z rezerwacjami – czarterami (informacje o wynajmie).
 
-Kwestia bezpieczeństwa:
+**Kwestia bezpieczeństwa:**
 Bezpieczne przechowywanie haseł: hashowanie haseł.
 
-Wdrożenie aplikacji:
+**Wdrożenie aplikacji:**
 CI/CD: wykorzystanie repozytorium kodu na GitHub.
 
-Konteneryzacja: Docker.
+**Konteneryzacja: Docker.**
 
-Testowanie:
+**Testowanie:**
 Testowanie REST API przy użyciu narzędzia Postman (kolekcja testów w katalogu yachtcharterpl\app\testy.postman_collection)
 
 
 
 
 
-Opis systemu
+**Opis systemu**
 
 Wszystkie strony są responsywne i wyświetlają się poprawnie na urządzeniach mobilnych.
 
 
 
-Wyszukiwanie jachtów
+**Wyszukiwanie jachtów**
 
 Użytkownicy mogą wyszukiwać jachty na podstawie dostępnych filtrów:
 - Liczba miejsc na pokładzie, liczba kabin: Wybór wielkości jachtu w odniesieniu do potrzeb
@@ -65,7 +65,7 @@ Po wybraniu odpowiednich filtrów użytkownik otrzymuje listę jachtów spełnia
 
 
 
-Przeglądanie szczegółów jachtu
+**Przeglądanie szczegółów jachtu**
 
 Użytkownik przechodząc na kartę danej jednostki otrzymuje następujące informacje takie jak: zdjęcie jednostki, nazwa, krótki opis, liczba łóżek, liczba kabin, maksymalny dystans do przepłynięciu na silniku (zależne od pojemności baku na paliwo), producent jednostki, nazwa armatora, opinie, liczba miejsc na pokładzie, moc silnika (mierzona w koniach mechanicznych), cena za jeden dzień w sezonie wysokim, cena za jeden dzień w sezonie niskim, rok produkcji jednostki. Na Rysunku przedstawiono dane szczegółowe jachtu. 
 
@@ -73,7 +73,7 @@ Użytkownik przechodząc na kartę danej jednostki otrzymuje następujące infor
 
  
 
-Potwierdzenie rezerwacji
+**Potwierdzenie rezerwacji**
 
 W przypadku, gdy użytkownik chce potwierdzić rezerwację,  zostaje przeniesiony na osobną kartę, gdzie zostanie wyświetlony formularz rezerwacji (Rysunek 4.5). Dane wyświetlane w potwierdzeniu rezerwacji to nazwa rezerwacji, opis, data rozpoczęcia, data zakończenia oraz port. 
 
