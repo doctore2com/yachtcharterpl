@@ -61,6 +61,9 @@ Użytkownicy mogą wyszukiwać jachty na podstawie dostępnych filtrów:
 
 Po wybraniu odpowiednich filtrów użytkownik otrzymuje listę jachtów spełniających kryteria. Każdy jacht posiada krótki opis w postaci: nazwy jednostki, opisu, liczby miejsc na pokładzie, ceny za wynajem. Na rysunku 4.3 przedstawiono wygląd listy jachtów wraz z filtrami.
 
+![image](https://github.com/user-attachments/assets/d8a42122-240d-4586-87ca-35fa27b1dde7)
+
+
 
 Przeglądanie szczegółów jachtu
 
