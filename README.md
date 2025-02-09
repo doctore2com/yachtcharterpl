@@ -1,68 +1,100 @@
 YachtCharterPl
 
-System wykonany w ramach pracy in¿ynierskiej.
+System wykonany w ramach pracy inÅ¼ynierskiej.
 
-Temat: System webowy wspomagaj¹cy rezerwacjê jachtów.
+Temat: System webowy wspomagajÄ…cy rezerwacjÄ™ jachtÃ³w.
+
 Stan na: 09.02.2025
+
 Struktura 
-System sk³ada siê z nastêpuj¹cych warstw:
+
+System skÅ‚ada siÄ™ z nastÄ™pujÄ…cych warstw:
+
 Frontend:
+
 Technologie: HTML5, CSS3, JavaScript (AngularJS).
-Responsywnoœæ: Dostosowanie aplikacji do ró¿nych urz¹dzeñ. 
-Interaktywnoœæ: Komponenty UI, formularze.
+ResponsywnoÅ›Ä‡: Dostosowanie aplikacji do rÃ³Å¼nych urzÄ…dzeÅ„. 
+InteraktywnoÅ›Ä‡: Komponenty UI, formularze.
+
+
 Backend:
+
 Technologie: framework Spring Boot, Java.
+
 Autoryzacja i uwierzytelnianie: format JSON, standard Oauth.
+
 Baza danych:
-Relacyjna baza danych MySQL, w której zaprojektowano tabele:
-Tabele u¿ytkowników (u¿ytkownicy – klienci, armatorzy, administrator).
-Tabele z ofertami jachtów (informacje o jachcie, lokalizacja, ceny).
-Tabele z rezerwacjami – czarterami (informacje o wynajmie).
-Kwestia bezpieczeñstwa:
-Bezpieczne przechowywanie hase³: hashowanie hase³.
-Wdro¿enie aplikacji:
+Relacyjna baza danych MySQL, w ktÃ³rej zaprojektowano tabele:
+
+Tabele uÅ¼ytkownikÃ³w (uÅ¼ytkownicy â€“ klienci, armatorzy, administrator).
+Tabele z ofertami jachtÃ³w (informacje o jachcie, lokalizacja, ceny).
+Tabele z rezerwacjami â€“ czarterami (informacje o wynajmie).
+
+Kwestia bezpieczeÅ„stwa:
+Bezpieczne przechowywanie haseÅ‚: hashowanie haseÅ‚.
+
+WdroÅ¼enie aplikacji:
 CI/CD: wykorzystanie repozytorium kodu na GitHub.
+
 Konteneryzacja: Docker.
+
 Testowanie:
-Testowanie REST API przy u¿yciu narzêdzia Postman (kolekcja testów w katalogu yachtcharterpl\app\testy.postman_collection)
+Testowanie REST API przy uÅ¼yciu narzÄ™dzia Postman (kolekcja testÃ³w w katalogu yachtcharterpl\app\testy.postman_collection)
+
+
+
+
+
 Opis systemu
-Wszystkie strony s¹ responsywne i wyœwietlaj¹ siê poprawnie na urz¹dzeniach mobilnych.
 
-Wyszukiwanie jachtów
+Wszystkie strony sÄ… responsywne i wyÅ›wietlajÄ… siÄ™ poprawnie na urzÄ…dzeniach mobilnych.
 
-U¿ytkownicy mog¹ wyszukiwaæ jachty na podstawie dostêpnych filtrów:
-Liczba miejsc na pok³adzie, liczba kabin: Wybór wielkoœci jachtu w odniesieniu do potrzeb
-Rok produkcji jachtu
-Cena w sezonie
-    Po wybraniu odpowiednich filtrów u¿ytkownik otrzymuje listê jachtów spe³niaj¹cych kryteria. Ka¿dy jacht posiada krótki opis w postaci: nazwy jednostki, opisu, liczby miejsc na pok³adzie, ceny za wynajem. Na rysunku 4.3 przedstawiono wygl¹d listy jachtów wraz z filtrami.
 
-Przegl¹danie szczegó³ów jachtu
 
-	U¿ytkownik przechodz¹c na kartê danej jednostki otrzymuje nastêpuj¹ce informacje takie jak: zdjêcie jednostki, nazwa, krótki opis, liczba ³ó¿ek, liczba kabin, maksymalny dystans do przep³yniêciu na silniku (zale¿ne od pojemnoœci baku na paliwo), producent jednostki, nazwa armatora, opinie, liczba miejsc na pok³adzie, moc silnika (mierzona w koniach mechanicznych), cena za jeden dzieñ w sezonie wysokim, cena za jeden dzieñ w sezonie niskim, rok produkcji jednostki. Na Rysunku 4.4 przedstawiono dane szczegó³owe jachtu. 
+Wyszukiwanie jachtÃ³w
+
+UÅ¼ytkownicy mogÄ… wyszukiwaÄ‡ jachty na podstawie dostÄ™pnych filtrÃ³w:
+- Liczba miejsc na pokÅ‚adzie, liczba kabin: WybÃ³r wielkoÅ›ci jachtu w odniesieniu do potrzeb
+- Rok produkcji jachtu
+- Cena w sezonie
+
+
+Po wybraniu odpowiednich filtrÃ³w uÅ¼ytkownik otrzymuje listÄ™ jachtÃ³w speÅ‚niajÄ…cych kryteria. KaÅ¼dy jacht posiada krÃ³tki opis w postaci: nazwy jednostki, opisu, liczby miejsc na pokÅ‚adzie, ceny za wynajem. Na rysunku 4.3 przedstawiono wyglÄ…d listy jachtÃ³w wraz zÂ filtrami.
+
+
+PrzeglÄ…danie szczegÃ³Å‚Ã³w jachtu
+
+UÅ¼ytkownik przechodzÄ…c na kartÄ™ danej jednostki otrzymuje nastÄ™pujÄ…ce informacje takie jak: zdjÄ™cie jednostki, nazwa, krÃ³tki opis, liczba Å‚Ã³Å¼ek, liczba kabin, maksymalny dystans do przepÅ‚yniÄ™ciu na silniku (zaleÅ¼ne od pojemnoÅ›ci baku na paliwo), producent jednostki, nazwa armatora, opinie, liczba miejsc na pokÅ‚adzie, moc silnika (mierzona wÂ koniach mechanicznych), cena za jeden dzieÅ„ w sezonie wysokim, cena za jeden dzieÅ„ wÂ sezonie niskim, rok produkcji jednostki. Na Rysunku 4.4 przedstawiono dane szczegÃ³Å‚owe jachtu. 
  
 
 Potwierdzenie rezerwacji
 
-	W przypadku, gdy u¿ytkownik chce potwierdziæ rezerwacjê,  zostaje przeniesiony na osobn¹ kartê, gdzie zostanie wyœwietlony formularz rezerwacji (Rysunek 4.5). Dane wyœwietlane w potwierdzeniu rezerwacji to nazwa rezerwacji, opis, data rozpoczêcia, data zakoñczenia oraz port. 
+W przypadku, gdy uÅ¼ytkownik chce potwierdziÄ‡ rezerwacjÄ™,  zostaje przeniesiony na osobnÄ… kartÄ™, gdzie zostanie wyÅ›wietlony formularz rezerwacji (Rysunek 4.5). Dane wyÅ›wietlane w potwierdzeniu rezerwacji to nazwa rezerwacji, opis, data rozpoczÄ™cia, data zakoÅ„czenia oraz port. 
 
 
 	
-	Ostatnim etapem procesu rezerwacyjnego jest potwierdzenie rezerwacji poprzez naciœniêcie przycisku Zarezerwuj.
-	Jeœli u¿ytkownik rozmyœli siê w odniesieniu do danego jachtu, mo¿e nacisn¹æ przycisk Anuluj na formularzu. W ten sposób jacht ponownie bêdzie mo¿liwy do wynajmu w danym okresie. 
-	Po prawid³owej rezerwacji jachtu na dany okres wyœwietli siê informacja o rezerwacji, a tym samym rezerwacja bêdzie dostêpna w karcie Lista rezerwacji w górnym menu. Listê rezerwacji zosta³a udostêpniona na rysunku 4.6.
+Ostatnim etapem procesu rezerwacyjnego jest potwierdzenie rezerwacji poprzez naciÅ›niÄ™cie przycisku Zarezerwuj.
+JeÅ›li uÅ¼ytkownik rozmyÅ›li siÄ™ w odniesieniu do danego jachtu, moÅ¼e nacisnÄ…Ä‡ przycisk Anuluj na formularzu. W ten sposÃ³b jacht ponownie bÄ™dzie moÅ¼liwy do wynajmu wÂ danym okresie. 
+Po prawidÅ‚owej rezerwacji jachtu na dany okres wyÅ›wietli siÄ™ informacja o rezerwacji, a tym samym rezerwacja bÄ™dzie dostÄ™pna w karcie Lista rezerwacji w gÃ³rnym menu. ListÄ™ rezerwacji zostaÅ‚a udostÄ™pniona na rysunku 4.6.
 
 
 Dodawanie jachtu do bazy ofert
 
-	U¿ytkownik (armator lub administrator) posiada mo¿liwoœæ dodania nowej oferty do bazy danych. Aby dodaæ tak¹ ofertê u¿ytkownik naciska przycisk Dodaj jacht w górnym menu, a nastêpnie uzupe³nia wszystkie pola dostêpne dla jednostki: nazwa, krótki opis, liczba ³ó¿ek, liczba kabin, maksymalny dystans do przep³yniêciu na silniku (zale¿ne od pojemnoœci baku na paliwo), producent jednostki, nazwa armatora, iloœæ miejsc na pok³adzie, moc silnika (mierzona w koniach mechanicznych), cena za jeden dzieñ w sezonie wysokim, cena za jeden dzieñ w sezonie niskim, rok produkcji jednostki, dodanie zdjêcia do oferty (domyœlnie z katalogu \client\src\assets\). Formularz dodawania nowego jachtu do bazy danych zosta³ przedstawiony na Rysunku 4.7.
+UÅ¼ytkownik (armator lub administrator) posiada moÅ¼liwoÅ›Ä‡ dodania nowej oferty do bazy danych. Aby dodaÄ‡ takÄ… ofertÄ™ uÅ¼ytkownik naciska przycisk Dodaj jacht w gÃ³rnym menu, a nastÄ™pnie uzupeÅ‚nia wszystkie pola dostÄ™pne dla jednostki: nazwa, krÃ³tki opis, liczba Å‚Ã³Å¼ek, liczba kabin, maksymalny dystans do przepÅ‚yniÄ™ciu na silniku (zaleÅ¼ne od pojemnoÅ›ci baku na paliwo), producent jednostki, nazwa armatora, iloÅ›Ä‡ miejsc na pokÅ‚adzie, moc silnika (mierzona w koniach mechanicznych), cena za jeden dzieÅ„ w sezonie wysokim, cena za jeden dzieÅ„ w sezonie niskim, rok produkcji jednostki, dodanie zdjÄ™cia do oferty (domyÅ›lnie z katalogu \client\src\assets\). Formularz dodawania nowego jachtu do bazy danych zostaÅ‚ przedstawiony na Rysunku 4.7.
 
-U¿ytkownicy
-U¿ytkownicy do testów:
 
-Rola: User Login: user1 Has³o: user1
-Rola: Admin Login: admin Has³o: admin123
-Rola: Sailor Login: sailor1 Has³o: sailor123
-Rola: Moderator Login: mode1 Has³o: mod123
+UÅ¼ytkownicy
+
+UÅ¼ytkownicy do testÃ³w:
+
+
+Rola: User Login: user1 HasÅ‚o: user1
+
+Rola: Admin Login: admin HasÅ‚o: admin123
+
+Rola: Sailor Login: sailor1 HasÅ‚o: sailor123
+
+Rola: Moderator Login: mode1 HasÅ‚o: mod123
 
 
 
