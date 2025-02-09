@@ -81,7 +81,9 @@ W przypadku, gdy użytkownik chce potwierdzić rezerwację,  zostaje przeniesion
 	
 Ostatnim etapem procesu rezerwacyjnego jest potwierdzenie rezerwacji poprzez naciśnięcie przycisku Zarezerwuj.
 Jeśli użytkownik rozmyśli się w odniesieniu do danego jachtu, może nacisnąć przycisk Anuluj na formularzu. W ten sposób jacht ponownie będzie możliwy do wynajmu w danym okresie. 
-Po prawidłowej rezerwacji jachtu na dany okres wyświetli się informacja o rezerwacji, a tym samym rezerwacja będzie dostępna w karcie Lista rezerwacji w górnym menu. Listę rezerwacji została udostępniona na rysunku 4.6.
+Po prawidłowej rezerwacji jachtu na dany okres wyświetli się informacja o rezerwacji, a tym samym rezerwacja będzie dostępna w karcie Lista rezerwacji w górnym menu. Listę rezerwacji została udostępniona na rysunku 
+
+![image](https://github.com/user-attachments/assets/dcb4f4ef-ce59-446a-8ac5-b0248c12de8a)
 
 
 Dodawanie jachtu do bazy ofert
