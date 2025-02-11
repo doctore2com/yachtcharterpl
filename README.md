@@ -105,7 +105,7 @@ Rola: Admin Login: admin Hasło: admin123
 
 Rola: Sailor Login: sailor1 Hasło: sailor123
 
-Rola: Moderator Login: mode1 Hasło: mod123
+Rola: Moderator Login: mod1 Hasło: mod123
 
 
 
